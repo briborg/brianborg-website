@@ -1,0 +1,85 @@
+{
+  "hero": {
+    "tagline": "Builder. Founder. Quality obsessive. I've spent 15+ years at the intersection of software, people, and the question that matters most: *does it actually work?*",
+    "subtitle": "Founder & CEO of OnPath Testing · Boulder, CO & the Indian Himalayas"
+  },
+  "about": {
+    "heading": "The short version",
+    "paragraphs": [
+      "I started my career writing code — and immediately discovered I had a talent for breaking it. That detour into QA turned into a calling. I loved the puzzle of it: understanding systems deeply enough to find where they'd fail before users did.",
+      "In 2009, I founded **OnPath Testing** with a simple idea: small and mid-sized companies deserve the same quality engineering that enterprises get, without the enterprise price tag or bureaucracy. Today we're a team of 50+ engineers across 10 countries, and we've helped companies from scrappy startups to established brands ship software they're confident in.",
+      "But I'm not just a QA guy. I'm a builder at heart — whether it's a business, a tool, a team, or a process. I get energized by taking something messy and making it work. I care about craft, about doing things right, and about the people on the other end of the software we ship.",
+      "I run things from Boulder, Colorado — though you'll sometimes find me in the Indian Himalayas, where my wife is from and where I go to recharge. I speak some Hindi (enough to get in trouble), a little Spanish, and even less German.",
+      "Right now I'm deep in the intersection of **AI and quality engineering**. Teams are shipping AI-generated code faster than ever, and the question everyone's asking is: *does it actually work?* That's the problem I've spent my whole career solving — and it's never been more relevant."
+    ]
+  },
+  "services": [
+    {
+      "title": "OnPath Testing",
+      "description": "QA consulting for teams that care about quality but don't want to build a testing department from scratch. Manual testing, automation, performance, security, accessibility — we plug in, adapt to your process, and make your software better. We've been doing this since 2009 and our clients tend to stick around."
+    },
+    {
+      "title": "AI + Quality Engineering",
+      "description": "I'm building tools and frameworks at the intersection of AI and QA — from BDD test generation to agentic testing workflows. If you're trying to figure out how AI fits into your quality process, I've got opinions and I'm happy to share them."
+    },
+    {
+      "title": "Building & Advising",
+      "description": "I've built a global remote company from scratch, navigated the chaos of running a services business, and learned a lot about leadership, operations, and what it takes to keep a team of 50+ people across 10 countries moving in the same direction. I'm always happy to talk shop with other founders and builders."
+    },
+    {
+      "title": "The OnPath Way",
+      "description": "Our philosophy is simple: integrate consciously, improve continuously, and measure everything. We're not just a vendor — we're a true partner. We adapt to your team, your culture, and your process. Quality is everyone's responsibility, and brute force is never the answer."
+    }
+  ],
+  "testimonials": [
+    {
+      "quote": "OnPath did more than just help test and validate. They designed and implemented test methodologies and pointed out opportunities we weren't aware of. They really created a well-rounded approach as a true partner instead of just a vendor.",
+      "author": "Craig Roth",
+      "role": "Product Manager, ClearCaptions"
+    },
+    {
+      "quote": "Having OnPath as a partner gave me excellent flexibility to surge our testing resources when needed. If you need manual test support, OnPath is a great option to increase your capacity.",
+      "author": "Tom Steiger",
+      "role": "CTO, BioTRUST Nutrition"
+    },
+    {
+      "quote": "OnPath provides a solution that is no more costly than working with an offshore body shop, but delivers much more. The resource they put in place was smart and wrote up good defects.",
+      "author": "Douglas Knoll",
+      "role": "President, CodeRinger"
+    },
+    {
+      "quote": "We failed out of a lot of external vendors before working with OnPath. The model with a US person managing was able to bridge the common logistics problems of outsourcing QA. Brian is super responsive and easy to work with.",
+      "author": "Allison Reder",
+      "role": "COO, PAIRIN"
+    },
+    {
+      "quote": "Brian and his team were readily available to our needs and exceeded expectations.",
+      "author": "Robert Whent",
+      "role": "Founder, WeCam Technologies"
+    }
+  ],
+  "career": [
+    { "period": "2009–now", "title": "Founder & CEO, OnPath Testing", "description": "Built a QA consultancy from zero to 50+ engineers across 10 countries" },
+    { "period": "Earlier", "title": "Sr. QA Engineer, MapQuest", "description": "Quality engineering for one of the web's earliest mapping platforms" },
+    { "period": "", "title": "QA Manager & IT Director, Equity Creations", "description": "Dual role spanning quality and infrastructure" },
+    { "period": "", "title": "Lead QA Engineer, BT Group", "description": "Large-scale Unix telco deployments" },
+    { "period": "Education", "title": "M.S., Regis University", "description": "B.A., University of Colorado Boulder" }
+  ],
+  "recognition": [
+    "Mercury 100 — Fastest Growing Companies in Boulder Valley (2015, 2021, 2022)",
+    "Clutch Top Software Testing Companies (2019, 2022)",
+    "1% for the Planet member",
+    "15 verified client reviews on Clutch.co"
+  ],
+  "connect": {
+    "heading": "Let's talk",
+    "text": "Whether you need help with QA, want to talk about AI and testing, are building something and want to compare notes, or just want to swap stories about the Himalayas — I'm always up for a good conversation.",
+    "email": "me@brianborg.com",
+    "links": [
+      { "label": "LinkedIn", "url": "https://www.linkedin.com/in/brianborg/" },
+      { "label": "X / Twitter", "url": "https://x.com/OnPathTesting" },
+      { "label": "Instagram", "url": "https://www.instagram.com/onpathtestingqa/" },
+      { "label": "OnPath Testing", "url": "https://www.onpathtesting.com" }
+    ]
+  }
+}
