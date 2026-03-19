@@ -2,14 +2,23 @@
 import Layout from '../layouts/Layout.astro';
 ---
 
-<Layout title="Brian Borg — QA Leader, Builder, Founder">
+<Layout title="Brian Borg — Builder, Founder, Quality Obsessive">
   <!-- Hero -->
   <header class="min-h-[70vh] flex items-center">
     <div class="max-w-3xl mx-auto px-6 py-24">
-      <p class="text-teal-400 font-medium mb-4 tracking-wide uppercase text-sm">Hey, I'm</p>
-      <h1 class="text-5xl md:text-6xl font-bold mb-6 leading-tight">Brian Borg</h1>
+      <div class="flex flex-col md:flex-row md:items-center gap-8 mb-10">
+        <img
+          src="/brian-borg.jpg"
+          alt="Brian Borg"
+          class="w-36 h-36 rounded-full object-cover border-2 border-teal-400/30 shrink-0"
+        />
+        <div>
+          <p class="text-teal-400 font-medium mb-2 tracking-wide uppercase text-sm">Hey, I'm</p>
+          <h1 class="text-5xl md:text-6xl font-bold leading-tight">Brian Borg</h1>
+        </div>
+      </div>
       <p class="text-xl md:text-2xl text-gray-300 mb-8 leading-relaxed">
-        I've spent 15+ years making sure software actually works. I went from writing bugs as a developer to finding them as a QA lead to building a company that does it at scale.
+        Builder. Founder. Quality obsessive. I've spent 15+ years at the intersection of software, people, and the question that matters most: <em>does it actually work?</em>
       </p>
       <p class="text-lg text-gray-400">
         Founder & CEO of <a href="https://www.onpathtesting.com" target="_blank" rel="noopener" class="text-teal-400 hover:text-teal-300 underline decoration-teal-400/30 hover:decoration-teal-300 transition-colors">OnPath Testing</a> · Boulder, CO & the Indian Himalayas
@@ -27,6 +36,9 @@ import Layout from '../layouts/Layout.astro';
         </p>
         <p>
           In 2009, I founded <strong class="text-gray-100">OnPath Testing</strong> with a simple idea: small and mid-sized companies deserve the same quality engineering that enterprises get, without the enterprise price tag or bureaucracy. Today we're a team of 50+ engineers across 10 countries, and we've helped companies from scrappy startups to established brands ship software they're confident in.
+        </p>
+        <p>
+          But I'm not just a QA guy. I'm a builder at heart — whether it's a business, a tool, a team, or a process. I get energized by taking something messy and making it work. I care about craft, about doing things right, and about the people on the other end of the software we ship.
         </p>
         <p>
           I run things from Boulder, Colorado — though you'll sometimes find me in the Indian Himalayas, where my wife is from and where I go to recharge. I speak some Hindi (enough to get in trouble), a little Spanish, and even less German.
@@ -53,6 +65,12 @@ import Layout from '../layouts/Layout.astro';
           <h3 class="text-xl font-semibold text-teal-400 mb-3">AI + Quality Engineering</h3>
           <p class="text-lg text-gray-300 leading-relaxed">
             I'm building tools and frameworks at the intersection of AI and QA — from BDD test generation to agentic testing workflows. If you're trying to figure out how AI fits into your quality process, I've got opinions and I'm happy to share them.
+          </p>
+        </div>
+        <div>
+          <h3 class="text-xl font-semibold text-teal-400 mb-3">Building & Advising</h3>
+          <p class="text-lg text-gray-300 leading-relaxed">
+            I've built a global remote company from scratch, navigated the chaos of running a services business, and learned a lot about leadership, operations, and what it takes to keep a team of 50+ people across 10 countries moving in the same direction. I'm always happy to talk shop with other founders and builders.
           </p>
         </div>
         <div>
@@ -159,6 +177,7 @@ import Layout from '../layouts/Layout.astro';
       <ul class="space-y-3 text-lg text-gray-300">
         <li>Mercury 100 — Fastest Growing Companies in Boulder Valley (2015, 2021, 2022)</li>
         <li>Clutch Top Software Testing Companies (2019, 2022)</li>
+        <li>1% for the Planet member</li>
         <li>15 verified client reviews on Clutch.co</li>
       </ul>
     </div>
@@ -169,12 +188,15 @@ import Layout from '../layouts/Layout.astro';
     <div class="max-w-3xl mx-auto px-6">
       <h2 class="text-3xl font-bold mb-6">Let's talk</h2>
       <p class="text-lg text-gray-300 mb-8 leading-relaxed">
-        Whether you need help with QA, want to talk about AI and testing, or just want to swap stories about the Himalayas — I'm always up for a good conversation.
+        Whether you need help with QA, want to talk about AI and testing, are building something and want to compare notes, or just want to swap stories about the Himalayas — I'm always up for a good conversation.
       </p>
+      <a href="mailto:brian@onpathtesting.com" class="inline-block bg-teal-500 hover:bg-teal-400 text-gray-950 font-semibold px-6 py-3 rounded-lg transition-colors mb-8">
+        brian@onpathtesting.com
+      </a>
       <div class="flex flex-wrap gap-6 text-lg">
-        <a href="mailto:brian@onpathtesting.com" class="text-teal-400 hover:text-teal-300 transition-colors">Email</a>
         <a href="https://www.linkedin.com/in/brianborg/" target="_blank" rel="noopener" class="text-teal-400 hover:text-teal-300 transition-colors">LinkedIn</a>
         <a href="https://x.com/OnPathTesting" target="_blank" rel="noopener" class="text-teal-400 hover:text-teal-300 transition-colors">X / Twitter</a>
+        <a href="https://www.instagram.com/onpathtestingqa/" target="_blank" rel="noopener" class="text-teal-400 hover:text-teal-300 transition-colors">Instagram</a>
         <a href="https://www.onpathtesting.com" target="_blank" rel="noopener" class="text-teal-400 hover:text-teal-300 transition-colors">OnPath Testing</a>
       </div>
     </div>
