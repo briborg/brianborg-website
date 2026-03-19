@@ -1,5 +1,6 @@
 backend:
-  name: git-gateway
+  name: github
+  repo: briborg/brianborg-website
   branch: main
 
 media_folder: public/images
