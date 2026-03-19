@@ -2,15 +2,188 @@
 import Layout from '../layouts/Layout.astro';
 ---
 
-<Layout title="Brian Borg">
-  <main class="max-w-2xl mx-auto px-6 py-24">
-    <h1 class="text-4xl font-bold mb-4">Brian Borg</h1>
-    <p class="text-xl text-gray-400 mb-8">
-      Founder & CEO of OnPath Testing. 15+ years in software QA.
-      Building at the intersection of quality engineering and AI.
-    </p>
-    <p class="text-gray-500">
-      Site under construction. More coming soon.
-    </p>
-  </main>
+<Layout title="Brian Borg — QA Leader, Builder, Founder">
+  <!-- Hero -->
+  <header class="min-h-[70vh] flex items-center">
+    <div class="max-w-3xl mx-auto px-6 py-24">
+      <p class="text-teal-400 font-medium mb-4 tracking-wide uppercase text-sm">Hey, I'm</p>
+      <h1 class="text-5xl md:text-6xl font-bold mb-6 leading-tight">Brian Borg</h1>
+      <p class="text-xl md:text-2xl text-gray-300 mb-8 leading-relaxed">
+        I've spent 15+ years making sure software actually works. I went from writing bugs as a developer to finding them as a QA lead to building a company that does it at scale.
+      </p>
+      <p class="text-lg text-gray-400">
+        Founder & CEO of <a href="https://www.onpathtesting.com" target="_blank" rel="noopener" class="text-teal-400 hover:text-teal-300 underline decoration-teal-400/30 hover:decoration-teal-300 transition-colors">OnPath Testing</a> · Boulder, CO & the Indian Himalayas
+      </p>
+    </div>
+  </header>
+
+  <!-- About -->
+  <section id="about" class="py-20 border-t border-gray-800">
+    <div class="max-w-3xl mx-auto px-6">
+      <h2 class="text-3xl font-bold mb-8">The short version</h2>
+      <div class="space-y-5 text-lg text-gray-300 leading-relaxed">
+        <p>
+          I started my career writing code — and immediately discovered I had a talent for breaking it. That detour into QA turned into a calling. I loved the puzzle of it: understanding systems deeply enough to find where they'd fail before users did.
+        </p>
+        <p>
+          In 2009, I founded <strong class="text-gray-100">OnPath Testing</strong> with a simple idea: small and mid-sized companies deserve the same quality engineering that enterprises get, without the enterprise price tag or bureaucracy. Today we're a team of 50+ engineers across 10 countries, and we've helped companies from scrappy startups to established brands ship software they're confident in.
+        </p>
+        <p>
+          I run things from Boulder, Colorado — though you'll sometimes find me in the Indian Himalayas, where my wife is from and where I go to recharge. I speak some Hindi (enough to get in trouble), a little Spanish, and even less German.
+        </p>
+        <p>
+          Right now I'm deep in the intersection of <strong class="text-gray-100">AI and quality engineering</strong>. Teams are shipping AI-generated code faster than ever, and the question everyone's asking is: <em>does it actually work?</em> That's the problem I've spent my whole career solving — and it's never been more relevant.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- What I Do -->
+  <section id="work" class="py-20 border-t border-gray-800">
+    <div class="max-w-3xl mx-auto px-6">
+      <h2 class="text-3xl font-bold mb-8">What I do</h2>
+      <div class="space-y-10">
+        <div>
+          <h3 class="text-xl font-semibold text-teal-400 mb-3">OnPath Testing</h3>
+          <p class="text-lg text-gray-300 leading-relaxed">
+            QA consulting for teams that care about quality but don't want to build a testing department from scratch. Manual testing, automation, performance, security, accessibility — we plug in, adapt to your process, and make your software better. We've been doing this since 2009 and our clients tend to stick around.
+          </p>
+        </div>
+        <div>
+          <h3 class="text-xl font-semibold text-teal-400 mb-3">AI + Quality Engineering</h3>
+          <p class="text-lg text-gray-300 leading-relaxed">
+            I'm building tools and frameworks at the intersection of AI and QA — from BDD test generation to agentic testing workflows. If you're trying to figure out how AI fits into your quality process, I've got opinions and I'm happy to share them.
+          </p>
+        </div>
+        <div>
+          <h3 class="text-xl font-semibold text-teal-400 mb-3">The OnPath Way</h3>
+          <p class="text-lg text-gray-300 leading-relaxed">
+            Our philosophy is simple: integrate consciously, improve continuously, and measure everything. We're not just a vendor — we're a true partner. We adapt to your team, your culture, and your process. Quality is everyone's responsibility, and brute force is never the answer.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section id="testimonials" class="py-20 border-t border-gray-800">
+    <div class="max-w-3xl mx-auto px-6">
+      <h2 class="text-3xl font-bold mb-10">What clients say</h2>
+      <div class="space-y-10">
+        <blockquote class="border-l-2 border-teal-400/50 pl-6">
+          <p class="text-lg text-gray-300 italic leading-relaxed mb-3">
+            "OnPath did more than just help test and validate. They designed and implemented test methodologies and pointed out opportunities we weren't aware of. They really created a well-rounded approach as a true partner instead of just a vendor."
+          </p>
+          <cite class="text-gray-500 not-italic">— Craig Roth, Product Manager, ClearCaptions</cite>
+        </blockquote>
+
+        <blockquote class="border-l-2 border-teal-400/50 pl-6">
+          <p class="text-lg text-gray-300 italic leading-relaxed mb-3">
+            "Having OnPath as a partner gave me excellent flexibility to surge our testing resources when needed. If you need manual test support, OnPath is a great option to increase your capacity."
+          </p>
+          <cite class="text-gray-500 not-italic">— Tom Steiger, CTO, BioTRUST Nutrition</cite>
+        </blockquote>
+
+        <blockquote class="border-l-2 border-teal-400/50 pl-6">
+          <p class="text-lg text-gray-300 italic leading-relaxed mb-3">
+            "OnPath provides a solution that is no more costly than working with an offshore body shop, but delivers much more. The resource they put in place was smart and wrote up good defects."
+          </p>
+          <cite class="text-gray-500 not-italic">— Douglas Knoll, President, CodeRinger</cite>
+        </blockquote>
+
+        <blockquote class="border-l-2 border-teal-400/50 pl-6">
+          <p class="text-lg text-gray-300 italic leading-relaxed mb-3">
+            "We failed out of a lot of external vendors before working with OnPath. The model with a US person managing was able to bridge the common logistics problems of outsourcing QA. Brian is super responsive and easy to work with."
+          </p>
+          <cite class="text-gray-500 not-italic">— Allison Reder, COO, PAIRIN</cite>
+        </blockquote>
+
+        <blockquote class="border-l-2 border-teal-400/50 pl-6">
+          <p class="text-lg text-gray-300 italic leading-relaxed mb-3">
+            "Brian and his team were readily available to our needs and exceeded expectations."
+          </p>
+          <cite class="text-gray-500 not-italic">— Robert Whent, Founder, WeCam Technologies</cite>
+        </blockquote>
+      </div>
+    </div>
+  </section>
+
+  <!-- Career Timeline -->
+  <section id="journey" class="py-20 border-t border-gray-800">
+    <div class="max-w-3xl mx-auto px-6">
+      <h2 class="text-3xl font-bold mb-10">The journey</h2>
+      <div class="space-y-6">
+        <div class="flex gap-6">
+          <div class="text-teal-400 font-mono text-sm pt-1 w-24 shrink-0">2009–now</div>
+          <div>
+            <h3 class="font-semibold text-gray-100">Founder & CEO, OnPath Testing</h3>
+            <p class="text-gray-400">Built a QA consultancy from zero to 50+ engineers across 10 countries</p>
+          </div>
+        </div>
+        <div class="flex gap-6">
+          <div class="text-teal-400 font-mono text-sm pt-1 w-24 shrink-0">Earlier</div>
+          <div>
+            <h3 class="font-semibold text-gray-100">Sr. QA Engineer, MapQuest</h3>
+            <p class="text-gray-400">Quality engineering for one of the web's earliest mapping platforms</p>
+          </div>
+        </div>
+        <div class="flex gap-6">
+          <div class="text-teal-400 font-mono text-sm pt-1 w-24 shrink-0"></div>
+          <div>
+            <h3 class="font-semibold text-gray-100">QA Manager & IT Director, Equity Creations</h3>
+            <p class="text-gray-400">Dual role spanning quality and infrastructure</p>
+          </div>
+        </div>
+        <div class="flex gap-6">
+          <div class="text-teal-400 font-mono text-sm pt-1 w-24 shrink-0"></div>
+          <div>
+            <h3 class="font-semibold text-gray-100">Lead QA Engineer, BT Group</h3>
+            <p class="text-gray-400">Large-scale Unix telco deployments</p>
+          </div>
+        </div>
+        <div class="flex gap-6">
+          <div class="text-teal-400 font-mono text-sm pt-1 w-24 shrink-0">Education</div>
+          <div>
+            <h3 class="font-semibold text-gray-100">M.S., Regis University</h3>
+            <p class="text-gray-400">B.A., University of Colorado Boulder</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Recognition -->
+  <section id="recognition" class="py-20 border-t border-gray-800">
+    <div class="max-w-3xl mx-auto px-6">
+      <h2 class="text-3xl font-bold mb-8">Recognition</h2>
+      <ul class="space-y-3 text-lg text-gray-300">
+        <li>Mercury 100 — Fastest Growing Companies in Boulder Valley (2015, 2021, 2022)</li>
+        <li>Clutch Top Software Testing Companies (2019, 2022)</li>
+        <li>15 verified client reviews on Clutch.co</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Connect -->
+  <section id="connect" class="py-20 border-t border-gray-800">
+    <div class="max-w-3xl mx-auto px-6">
+      <h2 class="text-3xl font-bold mb-6">Let's talk</h2>
+      <p class="text-lg text-gray-300 mb-8 leading-relaxed">
+        Whether you need help with QA, want to talk about AI and testing, or just want to swap stories about the Himalayas — I'm always up for a good conversation.
+      </p>
+      <div class="flex flex-wrap gap-6 text-lg">
+        <a href="mailto:brian@onpathtesting.com" class="text-teal-400 hover:text-teal-300 transition-colors">Email</a>
+        <a href="https://www.linkedin.com/in/brianborg/" target="_blank" rel="noopener" class="text-teal-400 hover:text-teal-300 transition-colors">LinkedIn</a>
+        <a href="https://x.com/OnPathTesting" target="_blank" rel="noopener" class="text-teal-400 hover:text-teal-300 transition-colors">X / Twitter</a>
+        <a href="https://www.onpathtesting.com" target="_blank" rel="noopener" class="text-teal-400 hover:text-teal-300 transition-colors">OnPath Testing</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-10 border-t border-gray-800">
+    <div class="max-w-3xl mx-auto px-6 text-gray-600 text-sm">
+      &copy; {new Date().getFullYear()} Brian Borg. Boulder, CO.
+    </div>
+  </footer>
 </Layout>
