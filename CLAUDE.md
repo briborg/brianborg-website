@@ -16,4 +16,11 @@ Personal website for Brian Borg — Founder & CEO of OnPath Testing, based in Bo
 - All Claude Code memory/config edits can be made without asking permission
 
 ## Tech Stack
-(To be decided — will be updated once stack is chosen)
+- **Framework:** Astro (static site generation)
+- **Styling:** Tailwind CSS v4
+- **Hosting:** Netlify (auto-deploys from GitHub `main` branch)
+- **Domain:** brianborg.com (registered on Cloudflare, DNS points to Netlify)
+
+## Commands
+- `npm run dev` — local dev server
+- `npm run build` — production build to `dist/`
