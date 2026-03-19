@@ -1,15 +1,15 @@
 {
   "hero": {
     "tagline": "Builder. Founder. Quality obsessive. I've spent 15+ years at the intersection of software, people, and the question that matters most: *does it actually work?*",
-    "subtitle": "Founder & CEO of OnPath Testing · Boulder, CO & the Indian Himalayas"
+    "subtitle": "Founder & CEO of OnPath Testing · Boulder, CO"
   },
   "about": {
     "heading": "The short version",
     "paragraphs": [
       "I started my career writing code — and immediately discovered I had a talent for breaking it. That detour into QA turned into a calling. I loved the puzzle of it: understanding systems deeply enough to find where they'd fail before users did.",
-      "In 2009, I founded **OnPath Testing** with a simple idea: small and mid-sized companies deserve the same quality engineering that enterprises get, without the enterprise price tag or bureaucracy. Today we're a team of 50+ engineers across 10 countries, and we've helped companies from scrappy startups to established brands ship software they're confident in.",
+      "In 2009, I founded **OnPath Testing** with a simple idea: small and mid-sized companies deserve the same quality engineering that enterprises get, without the enterprise price tag or bureaucracy. Today we're a team of 20+ engineers helping companies from scrappy startups to established brands ship software they're confident in.",
       "But I'm not just a QA guy. I'm a builder at heart — whether it's a business, a tool, a team, or a process. I get energized by taking something messy and making it work. I care about craft, about doing things right, and about the people on the other end of the software we ship.",
-      "I run things from Boulder, Colorado — though you'll sometimes find me in the Indian Himalayas, where my wife is from and where I go to recharge. I speak some Hindi (enough to get in trouble), a little Spanish, and even less German.",
+      "I run things from Boulder, Colorado and in my home in the Indian Himalayas, where I go to recharge. I enjoy speaking in Hindi, Spanish, and some German when I'm traveling about.",
       "Right now I'm deep in the intersection of **AI and quality engineering**. Teams are shipping AI-generated code faster than ever, and the question everyone's asking is: *does it actually work?* That's the problem I've spent my whole career solving — and it's never been more relevant."
     ]
   },
@@ -24,7 +24,7 @@
     },
     {
       "title": "Building & Advising",
-      "description": "I've built a global remote company from scratch, navigated the chaos of running a services business, and learned a lot about leadership, operations, and what it takes to keep a team of 50+ people across 10 countries moving in the same direction. I'm always happy to talk shop with other founders and builders."
+      "description": "I've built a global remote company from scratch, navigated the chaos of running a services business, and learned a lot about leadership, operations, and what it takes to keep a culturally and geographically diverse team moving in the same direction. I'm always happy to talk shop with other founders and builders."
     },
     {
       "title": "The OnPath Way",
@@ -59,14 +59,39 @@
     }
   ],
   "career": [
-    { "period": "2009–now", "title": "Founder & CEO, OnPath Testing", "description": "Built a QA consultancy from zero to 50+ engineers across 10 countries" },
-    { "period": "Earlier", "title": "Sr. QA Engineer, MapQuest", "description": "Quality engineering for one of the web's earliest mapping platforms" },
-    { "period": "", "title": "QA Manager & IT Director, Equity Creations", "description": "Dual role spanning quality and infrastructure" },
-    { "period": "", "title": "Lead QA Engineer, BT Group", "description": "Large-scale Unix telco deployments" },
-    { "period": "Education", "title": "M.S., Regis University", "description": "B.A., University of Colorado Boulder" }
+    {
+      "period": "2009–now",
+      "title": "Founder & CEO, OnPath Testing",
+      "description": "Built a QA consultancy from zero to 50+ engineers across 10 countries"
+    },
+    {
+      "period": "Earlier",
+      "title": "Sr. QA Engineer, MapQuest",
+      "description": "Quality engineering for one of the web's earliest mapping platforms"
+    },
+    {
+      "period": "",
+      "title": "QA Manager & IT Director, Equity Creations",
+      "description": "Dual role spanning quality and infrastructure"
+    },
+    {
+      "period": "",
+      "title": "Lead QA Engineer, BT Group",
+      "description": "Large-scale Unix telco deployments"
+    },
+    {
+      "period": "Education",
+      "title": "Masters, Computer IT",
+      "description": "Regis University"
+    },
+    {
+      "period": "Education",
+      "title": "Bachelors of Arts, Kinesiology",
+      "description": "University of Colorado Boulder"
+    }
   ],
   "recognition": [
-    "Mercury 100 — Fastest Growing Companies in Boulder Valley (2015, 2021, 2022)",
+    "Mercury 100 — Fastest Growing Companies in Boulder Valley (2015, 2019, 2021-24)",
     "Clutch Top Software Testing Companies (2019, 2022)",
     "1% for the Planet member",
     "15 verified client reviews on Clutch.co"
@@ -76,10 +101,22 @@
     "text": "Whether you need help with QA, want to talk about AI and testing, are building something and want to compare notes, or just want to swap stories about the Himalayas — I'm always up for a good conversation.",
     "email": "me@brianborg.com",
     "links": [
-      { "label": "LinkedIn", "url": "https://www.linkedin.com/in/brianborg/" },
-      { "label": "X / Twitter", "url": "https://x.com/OnPathTesting" },
-      { "label": "Instagram", "url": "https://www.instagram.com/onpathtestingqa/" },
-      { "label": "OnPath Testing", "url": "https://www.onpathtesting.com" }
+      {
+        "label": "LinkedIn",
+        "url": "https://www.linkedin.com/in/brianborg/"
+      },
+      {
+        "label": "X / Twitter",
+        "url": "https://x.com/OnPathTesting"
+      },
+      {
+        "label": "Instagram",
+        "url": "https://www.instagram.com/onpathtestingqa/"
+      },
+      {
+        "label": "OnPath Testing",
+        "url": "https://www.onpathtesting.com"
+      }
     ]
   }
 }
