@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dev Process — Visual Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0f1117;
+    --bg2: #161922;
+    --bg3: #1c1f2e;
+    --blue: #4f8ff7;
+    --blue-light: #7eb3ff;
+    --green: #4ade80;
+    --green-dark: #22c55e;
+    --amber: #f59e0b;
+    --red: #ef4444;
+    --purple: #a78bfa;
+    --teal: #2dd4bf;
+    --text: #e2e8f0;
+    --muted: #64748b;
+    --border: rgba(79,143,247,0.15);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative;
+    padding: 60px 60px 50px;
+    border-bottom: 1px solid var(--border);
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 70% 50% at 80% 40%, rgba(79,143,247,0.08) 0%, transparent 70%),
+                radial-gradient(ellipse 40% 70% at 10% 60%, rgba(167,139,250,0.06) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .hero-label {
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--blue);
+    margin-bottom: 16px;
+    font-weight: 600;
+  }
+  .hero h1 {
+    font-size: clamp(32px, 4vw, 52px);
+    font-weight: 700;
+    line-height: 1.15;
+    color: #fff;
+    max-width: 700px;
+    margin-bottom: 12px;
+  }
+  .hero h1 span { color: var(--blue-light); }
+  .hero-sub {
+    font-size: 15px;
+    color: var(--muted);
+    max-width: 600px;
+    margin-bottom: 32px;
+  }
+  .hero-pills {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .pill {
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+    border: 1px solid;
+  }
+  .pill.blue { background: rgba(79,143,247,0.1); border-color: rgba(79,143,247,0.3); color: var(--blue-light); }
+  .pill.green { background: rgba(74,222,128,0.1); border-color: rgba(74,222,128,0.3); color: var(--green); }
+  .pill.purple { background: rgba(167,139,250,0.1); border-color: rgba(167,139,250,0.3); color: var(--purple); }
+  .pill.amber { background: rgba(245,158,11,0.1); border-color: rgba(245,158,11,0.3); color: var(--amber); }
+
+  /* ── NAV ── */
+  .sticky-nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(15,17,23,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 60px;
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+  }
+  .nav-btn {
+    padding: 14px 18px;
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    color: var(--muted);
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.2s;
+  }
+  .nav-btn:hover { color: var(--text); }
+  .nav-btn.active { color: var(--blue); border-bottom-color: var(--blue); }
+
+  /* ── SECTIONS ── */
+  .section {
+    display: none;
+    padding: 50px 60px;
+    max-width: 1100px;
+    margin: 0 auto;
+    animation: fadeIn 0.25s ease;
+  }
+  .section.active { display: block; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+  .section-title {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 6px;
+    color: #fff;
+  }
+  .section-title span { color: var(--blue-light); }
+  .section-intro {
+    font-size: 14px;
+    color: var(--muted);
+    margin-bottom: 36px;
+    max-width: 620px;
+  }
+
+  /* ── FLOW DIAGRAM ── */
+  .flow {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    position: relative;
+  }
+  .flow-step {
+    display: grid;
+    grid-template-columns: 64px 1fr;
+    gap: 0 20px;
+    position: relative;
+  }
+  .flow-step:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    left: 31px;
+    top: 64px;
+    bottom: -4px;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--blue), rgba(79,143,247,0.2));
+  }
+  .flow-num {
+    width: 64px;
+    height: 64px;
+    border-radius: 14px;
+    background: var(--bg3);
+    border: 2px solid var(--blue);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--blue-light);
+    flex-shrink: 0;
+    position: relative;
+    z-index: 1;
+  }
+  .flow-body {
+    padding: 14px 0 44px;
+  }
+  .flow-title {
+    font-size: 17px;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 6px;
+  }
+  .flow-desc {
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 10px;
+    max-width: 560px;
+    line-height: 1.7;
+  }
+  .flow-cmd {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 14px;
+    color: var(--green);
+    max-width: 520px;
+    margin-bottom: 8px;
+    overflow-x: auto;
+  }
+  .flow-note {
+    font-size: 12px;
+    color: var(--amber);
+    padding: 8px 14px;
+    border-left: 2px solid var(--amber);
+    background: rgba(245,158,11,0.05);
+    border-radius: 0 6px 6px 0;
+    max-width: 520px;
+    margin-top: 8px;
+  }
+
+  /* ── BRANCH DIAGRAM ── */
+  .branch-diagram {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 32px;
+    margin-bottom: 28px;
+    max-width: 700px;
+  }
+  .branch-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 10px 0;
+  }
+  .branch-row:not(:last-child) {
+    border-bottom: 1px solid rgba(79,143,247,0.08);
+  }
+  .branch-name {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    font-weight: 500;
+    min-width: 100px;
+  }
+  .branch-name.main { color: var(--green); }
+  .branch-name.staging { color: var(--amber); }
+  .branch-name.dev { color: var(--blue-light); }
+  .branch-name.feature { color: var(--purple); }
+  .branch-desc { font-size: 13px; color: var(--muted); }
+  .branch-arrow {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 16px 0 8px 20px;
+    font-size: 13px;
+    color: var(--muted);
+  }
+  .branch-arrow svg { width: 18px; height: 18px; }
+
+  /* ── CARDS GRID ── */
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+  }
+  .card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 22px;
+    transition: border-color 0.2s;
+  }
+  .card:hover { border-color: rgba(79,143,247,0.35); }
+  .card-icon { font-size: 22px; margin-bottom: 12px; }
+  .card-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 6px;
+  }
+  .card-body {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  /* ── CI PIPELINE VIZ ── */
+  .ci-pipeline {
+    display: flex;
+    gap: 0;
+    align-items: stretch;
+    margin-bottom: 28px;
+    flex-wrap: wrap;
+  }
+  .ci-stage {
+    flex: 1;
+    min-width: 200px;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    padding: 24px;
+    position: relative;
+  }
+  .ci-stage:first-child { border-radius: 12px 0 0 12px; }
+  .ci-stage:last-child { border-radius: 0 12px 12px 0; }
+  .ci-stage:not(:last-child)::after {
+    content: '>';
+    position: absolute;
+    right: -8px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 18px;
+    color: var(--blue);
+    z-index: 2;
+    background: var(--bg);
+    width: 16px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .ci-label {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  .ci-label.lint { color: var(--blue-light); }
+  .ci-label.test { color: var(--green); }
+  .ci-label.sec { color: var(--amber); }
+  .ci-items {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .ci-items li {
+    font-size: 12px;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .ci-items li::before {
+    content: '';
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .ci-stage:nth-child(1) .ci-items li::before { background: var(--blue-light); }
+  .ci-stage:nth-child(2) .ci-items li::before { background: var(--green); }
+  .ci-stage:nth-child(3) .ci-items li::before { background: var(--amber); }
+
+  /* ── CHECKLIST ── */
+  .checklist {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 600px;
+  }
+  .checklist li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 14px;
+    color: var(--text);
+    line-height: 1.5;
+  }
+  .check-box {
+    width: 22px;
+    height: 22px;
+    border-radius: 5px;
+    border: 2px solid var(--green);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+    font-size: 12px;
+    color: var(--green);
+  }
+
+  /* ── HOOKS TABLE ── */
+  .hooks-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 24px;
+    max-width: 700px;
+  }
+  .hooks-table th {
+    text-align: left;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--blue);
+    padding: 10px 16px;
+    border-bottom: 2px solid var(--border);
+    font-weight: 600;
+  }
+  .hooks-table td {
+    font-size: 13px;
+    padding: 10px 16px;
+    border-bottom: 1px solid rgba(79,143,247,0.06);
+  }
+  .hooks-table td:first-child {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--teal);
+    white-space: nowrap;
+  }
+  .hooks-table td:last-child { color: var(--muted); }
+
+  /* ── LOG LEVELS ── */
+  .log-level {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 4px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+  }
+  .log-level.debug { background: rgba(100,116,139,0.2); color: var(--muted); }
+  .log-level.info { background: rgba(79,143,247,0.15); color: var(--blue-light); }
+  .log-level.warning { background: rgba(245,158,11,0.15); color: var(--amber); }
+  .log-level.error { background: rgba(239,68,68,0.15); color: var(--red); }
+
+  /* ── FOOTER ── */
+  .page-footer {
+    margin-top: 60px;
+    padding: 24px 60px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+  }
+
+  @media (max-width: 768px) {
+    .hero, .section, .sticky-nav { padding-left: 20px; padding-right: 20px; }
+    .ci-pipeline { flex-direction: column; }
+    .ci-stage { border-radius: 0 !important; }
+    .ci-stage:not(:last-child)::after { display: none; }
+    .page-footer { padding: 16px 20px; flex-direction: column; gap: 6px; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-label">Brian Borg's Dev Process Template</div>
+  <h1>From Idea to <span>Production</span></h1>
+  <p class="hero-sub">A complete, repeatable development process. One setup script, consistent quality across every project. Built for the AI-assisted development era.</p>
+  <div class="hero-pills">
+    <span class="pill blue">GitHub Actions CI</span>
+    <span class="pill green">80% Coverage Gate</span>
+    <span class="pill purple">Pre-commit Hooks</span>
+    <span class="pill amber">Security Scanning</span>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav class="sticky-nav">
+  <button class="nav-btn active" onclick="show('workflow', this)">Daily Workflow</button>
+  <button class="nav-btn" onclick="show('branching', this)">Branching</button>
+  <button class="nav-btn" onclick="show('ci', this)">CI Pipeline</button>
+  <button class="nav-btn" onclick="show('testing', this)">Testing</button>
+  <button class="nav-btn" onclick="show('hooks', this)">Pre-commit</button>
+  <button class="nav-btn" onclick="show('report', this)">Build Report</button>
+  <button class="nav-btn" onclick="show('reviews', this)">Review Gates</button>
+  <button class="nav-btn" onclick="show('notify', this)">Notifications</button>
+  <button class="nav-btn" onclick="show('dod', this)">Definition of Done</button>
+  <button class="nav-btn" onclick="show('toolbox', this)">Full Toolbox</button>
+</nav>
+
+<!-- DAILY WORKFLOW -->
+<section id="workflow" class="section active">
+  <h2 class="section-title">Daily <span>Workflow</span></h2>
+  <p class="section-intro">Eight steps from starting work to clean-up. Every feature, every bug fix, every time.</p>
+
+  <div class="flow">
+    <div class="flow-step">
+      <div class="flow-num">01</div>
+      <div class="flow-body">
+        <div class="flow-title">Start from fresh dev</div>
+        <div class="flow-desc">Always begin by pulling the latest development branch. Never work from stale code.</div>
+        <div class="flow-cmd">git checkout dev && git pull</div>
+      </div>
+    </div>
+
+    <div class="flow-step">
+      <div class="flow-num">02</div>
+      <div class="flow-body">
+        <div class="flow-title">Create a feature branch</div>
+        <div class="flow-desc">Every change gets its own branch. Name it clearly — this becomes the PR title context.</div>
+        <div class="flow-cmd">git checkout -b feature/add-audio-extraction</div>
+      </div>
+    </div>
+
+    <div class="flow-step">
+      <div class="flow-num">03</div>
+      <div class="flow-body">
+        <div class="flow-title">Build the feature</div>
+        <div class="flow-desc">Write the code and write the tests in the same branch. Tests are not a follow-up task — they ship with the code, always.</div>
+        <div class="flow-note">Never create a separate "add tests later" PR. Code + tests = one unit of work.</div>
+      </div>
+    </div>
+
+    <div class="flow-step">
+      <div class="flow-num">04</div>
+      <div class="flow-body">
+        <div class="flow-title">Verify locally</div>
+        <div class="flow-desc">Run the full test suite. Pre-commit hooks check formatting, linting, and secrets automatically on commit.</div>
+        <div class="flow-cmd">pytest -v</div>
+      </div>
+    </div>
+
+    <div class="flow-step">
+      <div class="flow-num">05</div>
+      <div class="flow-body">
+        <div class="flow-title">Push and create PR</div>
+        <div class="flow-desc">Push the branch. The PR template auto-fills with what/why/how-to-test/checklist. Fill it out.</div>
+        <div class="flow-cmd">git push -u origin feature/add-audio-extraction</div>
+      </div>
+    </div>
+
+    <div class="flow-step">
+      <div class="flow-num">06</div>
+      <div class="flow-body">
+        <div class="flow-title">CI runs automatically</div>
+        <div class="flow-desc">GitHub Actions kicks off three jobs: lint, test, and security scan. All must pass before the PR can merge.</div>
+        <div class="flow-note">CI fails if coverage drops below 80% or if formatting/linting issues exist.</div>
+      </div>
+    </div>
+
+    <div class="flow-step">
+      <div class="flow-num">07</div>
+      <div class="flow-body">
+        <div class="flow-title">Merge on GitHub</div>
+        <div class="flow-desc">Never merge locally. Always through a PR on GitHub. Update CHANGELOG.md before merging.</div>
+      </div>
+    </div>
+
+    <div class="flow-step">
+      <div class="flow-num">08</div>
+      <div class="flow-body">
+        <div class="flow-title">Clean up</div>
+        <div class="flow-desc">Switch to main, pull latest, delete merged branches — locally and remotely.</div>
+        <div class="flow-cmd">git-done</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BRANCHING -->
+<section id="branching" class="section">
+  <h2 class="section-title">Branching <span>Strategy</span></h2>
+  <p class="section-intro">Three long-lived branches. Short-lived feature branches. PRs flow upward.</p>
+
+  <div class="branch-diagram">
+    <div class="branch-row">
+      <span class="branch-name main">main</span>
+      <span class="branch-desc">Production-ready code. Deploys to production. Always stable.</span>
+    </div>
+    <div class="branch-row">
+      <span class="branch-name staging">staging</span>
+      <span class="branch-desc">Pre-production testing. Validates before promotion to main.</span>
+    </div>
+    <div class="branch-row">
+      <span class="branch-name dev">dev</span>
+      <span class="branch-desc">Active development. Feature branches merge here first.</span>
+    </div>
+    <div class="branch-row">
+      <span class="branch-name feature">feature/*</span>
+      <span class="branch-desc">Short-lived. One per task. Created from dev, merged back to dev.</span>
+    </div>
+  </div>
+
+  <div class="branch-diagram" style="max-width:500px">
+    <div style="font-size:12px;color:var(--blue);font-weight:600;letter-spacing:0.15em;text-transform:uppercase;margin-bottom:16px;">PR Flow Direction</div>
+    <div style="display:flex;align-items:center;gap:12px;font-size:14px;flex-wrap:wrap;">
+      <span style="color:var(--purple);font-family:'JetBrains Mono',monospace;font-size:13px;">feature/*</span>
+      <span style="color:var(--muted);">&rarr;</span>
+      <span style="color:var(--blue-light);font-family:'JetBrains Mono',monospace;font-size:13px;">dev</span>
+      <span style="color:var(--muted);">&rarr;</span>
+      <span style="color:var(--amber);font-family:'JetBrains Mono',monospace;font-size:13px;">staging</span>
+      <span style="color:var(--muted);">&rarr;</span>
+      <span style="color:var(--green);font-family:'JetBrains Mono',monospace;font-size:13px;">main</span>
+    </div>
+    <div style="font-size:12px;color:var(--muted);margin-top:12px;">Never develop directly on main, staging, or dev. Always branch.</div>
+  </div>
+</section>
+
+<!-- CI PIPELINE -->
+<section id="ci" class="section">
+  <h2 class="section-title">CI <span>Pipeline</span></h2>
+  <p class="section-intro">Three jobs run on every push and every PR. All must pass before merge.</p>
+
+  <div class="ci-pipeline">
+    <div class="ci-stage">
+      <div class="ci-label lint">1. Lint</div>
+      <ul class="ci-items">
+        <li>black — formatting check</li>
+        <li>ruff — linting + auto-fix</li>
+        <li>Fails if code isn't formatted</li>
+      </ul>
+    </div>
+    <div class="ci-stage">
+      <div class="ci-label test">2. Test</div>
+      <ul class="ci-items">
+        <li>pytest with coverage</li>
+        <li>80% coverage threshold</li>
+        <li>HTML report + JUnit XML</li>
+        <li>Coverage summary in PR</li>
+      </ul>
+    </div>
+    <div class="ci-stage">
+      <div class="ci-label sec">3. Security</div>
+      <ul class="ci-items">
+        <li>detect-secrets — leaked keys</li>
+        <li>pip-audit — dependency CVEs</li>
+        <li>bandit — Python code scan</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3 style="font-size:16px;font-weight:600;color:#fff;margin-bottom:14px;">CI Outputs</h3>
+  <div class="cards-grid" style="max-width:800px;">
+    <div class="card">
+      <div class="card-title">Test Results</div>
+      <div class="card-body">Pass/fail summary on PR checks tab via JUnit XML. Download <code style="color:var(--teal);font-size:12px;">reports/test-report.html</code> for full detail.</div>
+    </div>
+    <div class="card">
+      <div class="card-title">Coverage Map</div>
+      <div class="card-body">Line-by-line coverage in <code style="color:var(--teal);font-size:12px;">reports/coverage/index.html</code>. Summary printed in GitHub Actions job summary.</div>
+    </div>
+    <div class="card">
+      <div class="card-title">Security Report</div>
+      <div class="card-body">Python code scan in <code style="color:var(--teal);font-size:12px;">reports/bandit-report.json</code>. Dependency vulnerabilities flagged inline.</div>
+    </div>
+  </div>
+  <div style="font-size:12px;color:var(--muted);margin-top:16px;">All artifacts retained for 30 days. Dependabot opens weekly PRs for dependency updates.</div>
+</section>
+
+<!-- TESTING -->
+<section id="testing" class="section">
+  <h2 class="section-title">Testing <span>Requirements</span></h2>
+  <p class="section-intro">Tests ship with code. Always. No exceptions.</p>
+
+  <div class="cards-grid" style="margin-bottom:32px;">
+    <div class="card">
+      <div class="card-icon" style="color:var(--green);">+</div>
+      <div class="card-title">New Feature</div>
+      <div class="card-body">Unit tests + integration tests in the same PR as the feature code.</div>
+    </div>
+    <div class="card">
+      <div class="card-icon" style="color:var(--red);">!</div>
+      <div class="card-title">Bug Fix</div>
+      <div class="card-body">Write a test that reproduces the bug first. Then fix the code. Same PR.</div>
+    </div>
+    <div class="card">
+      <div class="card-icon" style="color:var(--amber);">~</div>
+      <div class="card-title">Changed Behavior</div>
+      <div class="card-body">Update existing tests to match the new behavior. Same PR.</div>
+    </div>
+    <div class="card">
+      <div class="card-icon" style="color:var(--muted);">-</div>
+      <div class="card-title">Removed Feature</div>
+      <div class="card-body">Remove the feature's tests. Don't leave dead tests behind. Same PR.</div>
+    </div>
+  </div>
+
+  <div class="branch-diagram" style="max-width:600px;">
+    <div style="font-size:12px;color:var(--blue);font-weight:600;letter-spacing:0.15em;text-transform:uppercase;margin-bottom:20px;">The Testing Pyramid</div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:0;">
+      <div style="width:30%;padding:14px 0;text-align:center;background:rgba(167,139,250,0.12);border:1px solid rgba(167,139,250,0.3);border-radius:8px 8px 0 0;">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:500;color:var(--purple);">E2E</div>
+        <div style="font-size:11px;color:var(--muted);margin-top:2px;">Few — full browser flows</div>
+      </div>
+      <div style="width:62%;padding:14px 0;text-align:center;background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.25);border-top:none;">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:500;color:var(--amber);">Integration</div>
+        <div style="font-size:11px;color:var(--muted);margin-top:2px;">Moderate — API-level tests</div>
+      </div>
+      <div style="width:100%;padding:14px 0;text-align:center;background:rgba(74,222,128,0.1);border:1px solid rgba(74,222,128,0.25);border-top:none;border-radius:0 0 8px 8px;">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:500;color:var(--green);">Unit Tests</div>
+        <div style="font-size:11px;color:var(--muted);margin-top:2px;">Many — pure logic, fast</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="font-size:13px;color:var(--muted);max-width:600px;margin-top:20px;">
+    <strong style="color:var(--text);">Quality over percentage.</strong> Prioritize error paths, boundary values, state transitions, and integration points. Don't waste time testing trivial getters or framework internals.
+  </div>
+  <div style="font-size:13px;color:var(--muted);max-width:600px;margin-top:10px;">
+    <strong style="color:var(--text);">Tests are permanent.</strong> They are regression tests. A future change that breaks an old test is the system working correctly.
+  </div>
+</section>
+
+<!-- PRE-COMMIT HOOKS -->
+<section id="hooks" class="section">
+  <h2 class="section-title">Pre-commit <span>Hooks</span></h2>
+  <p class="section-intro">Nine hooks run automatically before every commit. Catches problems before they reach CI.</p>
+
+  <table class="hooks-table">
+    <thead>
+      <tr><th>Hook</th><th>What It Does</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>trailing-whitespace</td><td>Removes trailing whitespace from all files</td></tr>
+      <tr><td>end-of-file-fixer</td><td>Ensures every file ends with a newline</td></tr>
+      <tr><td>check-yaml</td><td>Validates YAML syntax (catches CI config errors)</td></tr>
+      <tr><td>check-added-large-files</td><td>Blocks files over 500KB from being committed</td></tr>
+      <tr><td>check-merge-conflict</td><td>Catches unresolved merge conflict markers</td></tr>
+      <tr><td>detect-private-key</td><td>Prevents accidentally committing private keys</td></tr>
+      <tr><td>black</td><td>Auto-formats Python code to consistent style</td></tr>
+      <tr><td>ruff</td><td>Lints Python code and auto-fixes common issues</td></tr>
+      <tr><td>detect-secrets</td><td>Scans for API keys, passwords, and credentials</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- BUILD REPORT -->
+<section id="report" class="section">
+  <h2 class="section-title">Build <span>Report</span></h2>
+  <p class="section-intro">Every PR gets a consolidated build report posted as a sticky comment. Updates on each push. Full history preserved.</p>
+
+  <div class="branch-diagram" style="max-width:650px;">
+    <div style="font-size:12px;color:var(--blue);font-weight:600;letter-spacing:0.15em;text-transform:uppercase;margin-bottom:18px;">What the Build Report Shows</div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+      <div>
+        <div style="font-size:13px;font-weight:600;color:#fff;margin-bottom:8px;">Test Results</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:12px;line-height:2;">
+          <div><span style="color:var(--green);">Passed</span> <span style="color:var(--muted);float:right;">47</span></div>
+          <div><span style="color:var(--red);">Failed</span> <span style="color:var(--muted);float:right;">2</span></div>
+          <div><span style="color:var(--amber);">Skipped</span> <span style="color:var(--muted);float:right;">1</span></div>
+          <div><span style="color:var(--muted);">Errors</span> <span style="color:var(--muted);float:right;">0</span></div>
+          <div style="border-top:1px solid var(--border);padding-top:4px;margin-top:4px;"><span style="color:#fff;">Total</span> <span style="color:var(--text);float:right;">50</span></div>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:13px;font-weight:600;color:#fff;margin-bottom:8px;">Coverage</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:12px;line-height:2;">
+          <div><span style="color:var(--text);">Overall</span> <span style="color:var(--green);float:right;">87.3%</span></div>
+          <div><span style="color:var(--text);">Threshold</span> <span style="color:var(--muted);float:right;">80%</span></div>
+        </div>
+        <div style="margin-top:12px;font-size:11px;color:var(--muted);">Files below 80% are listed individually with their coverage percentage.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cards-grid" style="max-width:650px;">
+    <div class="card">
+      <div class="card-title">Sticky PR Comment</div>
+      <div class="card-body">Report is posted as a comment directly on the PR. It updates on each push — you always see the latest results without leaving the PR page.</div>
+    </div>
+    <div class="card">
+      <div class="card-title">Step Summary</div>
+      <div class="card-body">Same report is written to GitHub Actions step summary. Every build is preserved in the Actions history for long-term reference.</div>
+    </div>
+    <div class="card">
+      <div class="card-title">Failure Details</div>
+      <div class="card-body">Failed tests are listed with their error messages directly in the report. No need to dig through CI logs to find what broke.</div>
+    </div>
+    <div class="card">
+      <div class="card-title">Downloadable Artifacts</div>
+      <div class="card-body">Full HTML test report, interactive coverage map, JUnit XML, and security scan results available as downloadable artifacts for 30 days.</div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEW GATES -->
+<section id="reviews" class="section">
+  <h2 class="section-title">Review <span>Gates</span></h2>
+  <p class="section-intro">Every PR requires two independent reviews before merge. Code quality and test quality are reviewed separately by different roles.</p>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));gap:20px;margin-bottom:32px;">
+    <div class="card" style="border-color:rgba(79,143,247,0.3);">
+      <div style="font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--blue);font-weight:600;margin-bottom:12px;">Gate 1</div>
+      <div class="card-title" style="font-size:18px;margin-bottom:12px;">Dev Lead Review</div>
+      <div class="card-body">
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:8px;padding:0;">
+          <li style="display:flex;gap:8px;align-items:flex-start;"><span style="color:var(--blue);">&#9679;</span> Code follows project conventions and style</li>
+          <li style="display:flex;gap:8px;align-items:flex-start;"><span style="color:var(--blue);">&#9679;</span> Architecture and design are sound</li>
+          <li style="display:flex;gap:8px;align-items:flex-start;"><span style="color:var(--blue);">&#9679;</span> No unnecessary complexity or over-engineering</li>
+          <li style="display:flex;gap:8px;align-items:flex-start;"><span style="color:var(--blue);">&#9679;</span> Error handling is appropriate</li>
+          <li style="display:flex;gap:8px;align-items:flex-start;"><span style="color:var(--blue);">&#9679;</span> Logging follows the standard</li>
+          <li style="display:flex;gap:8px;align-items:flex-start;"><span style="color:var(--blue);">&#9679;</span> No security concerns</li>
+        </ul>
+      </div>
+    </div>
+    <div class="card" style="border-color:rgba(74,222,128,0.3);">
+      <div style="font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--green);font-weight:600;margin-bottom:12px;">Gate 2</div>
+      <div class="card-title" style="font-size:18px;margin-bottom:12px;">QA Lead Review</div>
+      <div class="card-body">
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:8px;padding:0;">
+          <li style="display:flex;gap:8px;align-items:flex-start;"><span style="color:var(--green);">&#9679;</span> Tests cover the right scenarios (happy path, errors, edges)</li>
+          <li style="display:flex;gap:8px;align-items:flex-start;"><span style="color:var(--green);">&#9679;</span> Tests are meaningful — not testing trivial code</li>
+          <li style="display:flex;gap:8px;align-items:flex-start;"><span style="color:var(--green);">&#9679;</span> Test names clearly describe what they verify</li>
+          <li style="display:flex;gap:8px;align-items:flex-start;"><span style="color:var(--green);">&#9679;</span> Coverage has not dropped below 80%</li>
+          <li style="display:flex;gap:8px;align-items:flex-start;"><span style="color:var(--green);">&#9679;</span> No flaky or environment-dependent tests</li>
+          <li style="display:flex;gap:8px;align-items:flex-start;"><span style="color:var(--green);">&#9679;</span> Regression tests updated if behavior changed</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="branch-diagram" style="max-width:650px;">
+    <div style="font-size:12px;color:var(--blue);font-weight:600;letter-spacing:0.15em;text-transform:uppercase;margin-bottom:16px;">Review Flow</div>
+    <div style="display:flex;align-items:center;gap:12px;font-size:13px;flex-wrap:wrap;">
+      <span style="color:var(--purple);font-family:'JetBrains Mono',monospace;">PR Created</span>
+      <span style="color:var(--muted);">&rarr;</span>
+      <span style="color:var(--amber);font-family:'JetBrains Mono',monospace;">CI Passes</span>
+      <span style="color:var(--muted);">&rarr;</span>
+      <span style="color:var(--blue-light);font-family:'JetBrains Mono',monospace;">Dev Lead Review</span>
+      <span style="color:var(--muted);">&rarr;</span>
+      <span style="color:var(--green);font-family:'JetBrains Mono',monospace;">QA Lead Review</span>
+      <span style="color:var(--muted);">&rarr;</span>
+      <span style="color:#fff;font-family:'JetBrains Mono',monospace;">Merge</span>
+    </div>
+    <div style="font-size:12px;color:var(--muted);margin-top:14px;">Both reviews must be completed and signed off in the PR template before merge. Neither is optional.</div>
+  </div>
+</section>
+
+<!-- NOTIFICATIONS -->
+<section id="notify" class="section">
+  <h2 class="section-title">Build <span>Notifications</span></h2>
+  <p class="section-intro">Every build sends a notification to Slack. Color-coded, with direct links. No news is not good news — you should always know what happened.</p>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));gap:16px;margin-bottom:28px;">
+    <div class="card" style="border-left:3px solid var(--green);">
+      <div style="font-size:13px;font-weight:600;color:var(--green);margin-bottom:8px;">Pass Notification</div>
+      <div style="background:var(--bg3);border-radius:8px;padding:14px;font-size:12px;line-height:1.8;">
+        <div style="color:var(--green);">&#10003; <strong style="color:var(--text);">PR #42: Add audio extraction step</strong></div>
+        <div style="color:var(--muted);">All checks passed</div>
+        <div style="color:var(--muted);font-size:11px;font-style:italic;">briborg &middot; imi-library &middot; 14:32 UTC</div>
+      </div>
+    </div>
+    <div class="card" style="border-left:3px solid var(--red);">
+      <div style="font-size:13px;font-weight:600;color:var(--red);margin-bottom:8px;">Fail Notification</div>
+      <div style="background:var(--bg3);border-radius:8px;padding:14px;font-size:12px;line-height:1.8;">
+        <div style="color:var(--red);">&#10007; <strong style="color:var(--text);">PR #43: Update transcription config</strong></div>
+        <div style="color:var(--muted);">Failed: test, security</div>
+        <div style="color:var(--muted);font-size:11px;font-style:italic;">briborg &middot; imi-library &middot; 15:07 UTC</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="branch-diagram" style="max-width:600px;">
+    <div style="font-size:12px;color:var(--blue);font-weight:600;letter-spacing:0.15em;text-transform:uppercase;margin-bottom:14px;">When Notifications Fire</div>
+    <table style="width:100%;font-size:13px;">
+      <tr style="border-bottom:1px solid var(--border);">
+        <td style="padding:8px 0;color:var(--text);font-weight:500;">PR opened / updated</td>
+        <td style="padding:8px 0;color:var(--muted);">CI result + PR link + author</td>
+      </tr>
+      <tr style="border-bottom:1px solid var(--border);">
+        <td style="padding:8px 0;color:var(--text);font-weight:500;">Push to dev</td>
+        <td style="padding:8px 0;color:var(--muted);">CI result + commit link + author</td>
+      </tr>
+      <tr style="border-bottom:1px solid var(--border);">
+        <td style="padding:8px 0;color:var(--text);font-weight:500;">Push to staging</td>
+        <td style="padding:8px 0;color:var(--muted);">CI result + commit link + author</td>
+      </tr>
+      <tr>
+        <td style="padding:8px 0;color:var(--text);font-weight:500;">Push to main</td>
+        <td style="padding:8px 0;color:var(--muted);">Deploy notice + commit link + author</td>
+      </tr>
+    </table>
+  </div>
+
+  <div style="margin-top:24px;max-width:600px;">
+    <div style="font-size:15px;font-weight:600;color:#fff;margin-bottom:10px;">How to Activate</div>
+    <div class="flow">
+      <div class="flow-step" style="margin-bottom:-20px;">
+        <div class="flow-num" style="width:40px;height:40px;font-size:14px;border-radius:10px;">1</div>
+        <div class="flow-body" style="padding:6px 0 24px;">
+          <div style="font-size:13px;color:var(--text);">Create a Slack incoming webhook (Apps &rarr; Incoming Webhooks &rarr; Add to channel)</div>
+        </div>
+      </div>
+      <div class="flow-step" style="margin-bottom:-20px;">
+        <div class="flow-num" style="width:40px;height:40px;font-size:14px;border-radius:10px;">2</div>
+        <div class="flow-body" style="padding:6px 0 24px;">
+          <div style="font-size:13px;color:var(--text);">Add webhook URL as a GitHub Actions secret: <code style="color:var(--teal);font-size:12px;">SLACK_WEBHOOK_URL</code></div>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num" style="width:40px;height:40px;font-size:14px;border-radius:10px;">3</div>
+        <div class="flow-body" style="padding:6px 0 10px;">
+          <div style="font-size:13px;color:var(--text);">Done — notifications start automatically on the next CI run</div>
+        </div>
+      </div>
+    </div>
+    <div style="font-size:12px;color:var(--muted);margin-top:12px;">The notification job is pre-wired in CI from setup.sh. It skips gracefully if the secret isn't set — nothing breaks.</div>
+  </div>
+</section>
+
+<!-- DEFINITION OF DONE -->
+<section id="dod" class="section">
+  <h2 class="section-title">Definition of <span>Done</span></h2>
+  <p class="section-intro">A feature is complete when every box is checked. Not before.</p>
+
+  <ul class="checklist">
+    <li><span class="check-box">&#10003;</span>Code is written and follows project conventions (black, ruff clean)</li>
+    <li><span class="check-box">&#10003;</span>Unit tests + integration tests included in the same PR</li>
+    <li><span class="check-box">&#10003;</span>All tests pass locally (<code style="color:var(--teal);font-size:13px;">pytest -v</code>)</li>
+    <li><span class="check-box">&#10003;</span>Coverage has not dropped below 80%</li>
+    <li><span class="check-box">&#10003;</span>PR description follows the template (what, why, how to test, checklist)</li>
+    <li><span class="check-box">&#10003;</span>CI passes — lint + test + security scan</li>
+    <li><span class="check-box">&#10003;</span>Build report shows no regressions</li>
+    <li><span class="check-box">&#10003;</span>Dev Lead has reviewed and approved (code quality)</li>
+    <li><span class="check-box">&#10003;</span>QA Lead has reviewed and approved (test quality)</li>
+    <li><span class="check-box">&#10003;</span>CHANGELOG.md is updated</li>
+    <li><span class="check-box">&#10003;</span>PR is reviewed and merged via GitHub</li>
+    <li><span class="check-box">&#10003;</span>Linked requirement or issue is updated or closed</li>
+  </ul>
+</section>
+
+<!-- FULL TOOLBOX -->
+<section id="toolbox" class="section">
+  <h2 class="section-title">Full <span>Toolbox</span></h2>
+  <p class="section-intro">Everything that ships with the project template. One setup script installs all of it.</p>
+
+  <div class="cards-grid">
+    <div class="card">
+      <div class="card-icon">&#9881;</div>
+      <div class="card-title">Git Configuration</div>
+      <div class="card-body"><code style="color:var(--teal);font-size:11px;">fetch.prune = true</code> auto-cleans stale remote refs. <code style="color:var(--teal);font-size:11px;">git-done</code> alias for post-merge cleanup.</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">&#9878;</div>
+      <div class="card-title">GitHub Actions CI</div>
+      <div class="card-body">Auto-detects Python, Node, or full-stack. Generates <code style="color:var(--teal);font-size:11px;">ci.yml</code> with lint + test + security. Triggers on main/dev/staging.</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">&#128274;</div>
+      <div class="card-title">Pre-commit Hooks</div>
+      <div class="card-body">9 hooks: formatting (black), linting (ruff), secret detection, large file guard, YAML validation, merge conflict check.</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">&#128196;</div>
+      <div class="card-title">PR Template</div>
+      <div class="card-body">Standardized PR format: what changed, why, how to test, checklist. Auto-fills on every new PR.</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">&#128209;</div>
+      <div class="card-title">ADR Template</div>
+      <div class="card-body">Architecture Decision Records in <code style="color:var(--teal);font-size:11px;">docs/decisions/</code>. Context, options, decision, consequences.</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">&#128300;</div>
+      <div class="card-title">Dependabot</div>
+      <div class="card-body">Weekly checks for pip + GitHub Actions dependency updates. Opens PRs automatically with "dependencies" label.</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">&#128221;</div>
+      <div class="card-title">CHANGELOG.md</div>
+      <div class="card-body">Keep a Changelog format with semantic versioning. Updated in every PR that changes behavior.</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">&#128269;</div>
+      <div class="card-title">Security Scanning</div>
+      <div class="card-body">detect-secrets (leaked keys), pip-audit (dependency CVEs), bandit (Python code security). All in CI.</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">&#128200;</div>
+      <div class="card-title">Test Reports</div>
+      <div class="card-body">HTML test report, interactive coverage map, JUnit XML for PR summaries. 30-day artifact retention.</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">&#128203;</div>
+      <div class="card-title">Logging Standard</div>
+      <div class="card-body">Python <code style="color:var(--teal);font-size:11px;">logging</code> module only. DEBUG / INFO / WARNING / ERROR. Always include context.</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">&#128230;</div>
+      <div class="card-title">pyproject.toml</div>
+      <div class="card-body">Centralized config for black, ruff, and pytest. Coverage threshold, HTML reports, JUnit XML all pre-configured.</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">&#128462;</div>
+      <div class="card-title">Deliverables</div>
+      <div class="card-body">Every HTML doc also saved as PDF (Chrome headless). PDF is the shareable format for Drive and external teams.</div>
+    </div>
+  </div>
+</section>
+
+<div class="page-footer">
+  <span>Brian Borg's Dev Process Template</span>
+  <span>Last updated March 2026</span>
+</div>
+
+<script>
+  function show(id, btn) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    btn.classList.add('active');
+  }
+</script>
+</body>
+</html>
