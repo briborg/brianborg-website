@@ -1,0 +1,904 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Dev Process — Brian Borg">
+  <link slot="head" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <!-- Back link -->
+  <div class="max-w-5xl mx-auto px-6 pt-6">
+    <a href="/" class="text-teal-400 hover:text-teal-300 text-sm font-medium transition-colors">&larr; Back to brianborg.com</a>
+  </div>
+
+  <!-- HERO -->
+  <div class="hero-section relative px-6 md:px-[60px] py-[60px] pb-[50px] border-b border-teal-400/15 overflow-hidden">
+    <div class="hero-glow absolute inset-0 pointer-events-none"></div>
+    <div class="relative max-w-5xl mx-auto">
+      <div class="text-[11px] tracking-[0.25em] uppercase text-teal-400 mb-4 font-semibold">Brian Borg's Dev Process Template</div>
+      <h1 class="text-[clamp(32px,4vw,52px)] font-bold leading-[1.15] text-white max-w-[700px] mb-3">From Idea to <span class="text-teal-300">Production</span></h1>
+      <p class="text-[15px] text-gray-500 max-w-[600px] mb-8">A complete, repeatable development process. One setup script, consistent quality across every project. Built for the AI-assisted development era.</p>
+      <div class="flex gap-2.5 flex-wrap">
+        <span class="pill-teal">GitHub Actions CI</span>
+        <span class="pill-green">80% Coverage Gate</span>
+        <span class="pill-purple">Pre-commit Hooks</span>
+        <span class="pill-amber">Security Scanning</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- NAV -->
+  <nav class="sticky-nav sticky top-0 z-[100] bg-gray-950/95 backdrop-blur-[12px] border-b border-teal-400/15 px-6 md:px-[60px] flex gap-0 overflow-x-auto">
+    <button class="nav-btn active" onclick="show('workflow', this)">Daily Workflow</button>
+    <button class="nav-btn" onclick="show('branching', this)">Branching</button>
+    <button class="nav-btn" onclick="show('ci', this)">CI Pipeline</button>
+    <button class="nav-btn" onclick="show('testing', this)">Testing</button>
+    <button class="nav-btn" onclick="show('hooks', this)">Pre-commit</button>
+    <button class="nav-btn" onclick="show('report', this)">Build Report</button>
+    <button class="nav-btn" onclick="show('reviews', this)">Review Gates</button>
+    <button class="nav-btn" onclick="show('notify', this)">Notifications</button>
+    <button class="nav-btn" onclick="show('dod', this)">Definition of Done</button>
+    <button class="nav-btn" onclick="show('toolbox', this)">Full Toolbox</button>
+  </nav>
+
+  <!-- DAILY WORKFLOW -->
+  <section id="workflow" class="section active">
+    <h2 class="text-[28px] font-bold mb-1.5 text-white">Daily <span class="text-teal-300">Workflow</span></h2>
+    <p class="text-sm text-gray-500 mb-9 max-w-[620px]">Eight steps from starting work to clean-up. Every feature, every bug fix, every time.</p>
+
+    <div class="flow">
+      <div class="flow-step">
+        <div class="flow-num">01</div>
+        <div class="flow-body">
+          <div class="flow-title">Start from fresh dev</div>
+          <div class="flow-desc">Always begin by pulling the latest development branch. Never work from stale code.</div>
+          <div class="flow-cmd">git checkout dev && git pull</div>
+        </div>
+      </div>
+
+      <div class="flow-step">
+        <div class="flow-num">02</div>
+        <div class="flow-body">
+          <div class="flow-title">Create a feature branch</div>
+          <div class="flow-desc">Every change gets its own branch. Name it clearly — this becomes the PR title context.</div>
+          <div class="flow-cmd">git checkout -b feature/add-audio-extraction</div>
+        </div>
+      </div>
+
+      <div class="flow-step">
+        <div class="flow-num">03</div>
+        <div class="flow-body">
+          <div class="flow-title">Build the feature</div>
+          <div class="flow-desc">Write the code and write the tests in the same branch. Tests are not a follow-up task — they ship with the code, always.</div>
+          <div class="flow-note">Never create a separate "add tests later" PR. Code + tests = one unit of work.</div>
+        </div>
+      </div>
+
+      <div class="flow-step">
+        <div class="flow-num">04</div>
+        <div class="flow-body">
+          <div class="flow-title">Verify locally</div>
+          <div class="flow-desc">Run the full test suite. Pre-commit hooks check formatting, linting, and secrets automatically on commit.</div>
+          <div class="flow-cmd">pytest -v</div>
+        </div>
+      </div>
+
+      <div class="flow-step">
+        <div class="flow-num">05</div>
+        <div class="flow-body">
+          <div class="flow-title">Push and create PR</div>
+          <div class="flow-desc">Push the branch. The PR template auto-fills with what/why/how-to-test/checklist. Fill it out.</div>
+          <div class="flow-cmd">git push -u origin feature/add-audio-extraction</div>
+        </div>
+      </div>
+
+      <div class="flow-step">
+        <div class="flow-num">06</div>
+        <div class="flow-body">
+          <div class="flow-title">CI runs automatically</div>
+          <div class="flow-desc">GitHub Actions kicks off three jobs: lint, test, and security scan. All must pass before the PR can merge.</div>
+          <div class="flow-note">CI fails if coverage drops below 80% or if formatting/linting issues exist.</div>
+        </div>
+      </div>
+
+      <div class="flow-step">
+        <div class="flow-num">07</div>
+        <div class="flow-body">
+          <div class="flow-title">Merge on GitHub</div>
+          <div class="flow-desc">Never merge locally. Always through a PR on GitHub. Update CHANGELOG.md before merging.</div>
+        </div>
+      </div>
+
+      <div class="flow-step">
+        <div class="flow-num">08</div>
+        <div class="flow-body">
+          <div class="flow-title">Clean up</div>
+          <div class="flow-desc">Switch to main, pull latest, delete merged branches — locally and remotely.</div>
+          <div class="flow-cmd">git-done</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BRANCHING -->
+  <section id="branching" class="section">
+    <h2 class="text-[28px] font-bold mb-1.5 text-white">Branching <span class="text-teal-300">Strategy</span></h2>
+    <p class="text-sm text-gray-500 mb-9 max-w-[620px]">Three long-lived branches. Short-lived feature branches. PRs flow upward.</p>
+
+    <div class="diagram-box mb-7 max-w-[700px]">
+      <div class="branch-row">
+        <span class="font-mono text-sm font-medium min-w-[100px] text-green-400">main</span>
+        <span class="text-[13px] text-gray-500">Production-ready code. Deploys to production. Always stable.</span>
+      </div>
+      <div class="branch-row">
+        <span class="font-mono text-sm font-medium min-w-[100px] text-amber-400">staging</span>
+        <span class="text-[13px] text-gray-500">Pre-production testing. Validates before promotion to main.</span>
+      </div>
+      <div class="branch-row">
+        <span class="font-mono text-sm font-medium min-w-[100px] text-teal-300">dev</span>
+        <span class="text-[13px] text-gray-500">Active development. Feature branches merge here first.</span>
+      </div>
+      <div class="branch-row border-none!">
+        <span class="font-mono text-sm font-medium min-w-[100px] text-purple-400">feature/*</span>
+        <span class="text-[13px] text-gray-500">Short-lived. One per task. Created from dev, merged back to dev.</span>
+      </div>
+    </div>
+
+    <div class="diagram-box max-w-[500px]">
+      <div class="text-[12px] text-teal-400 font-semibold tracking-[0.15em] uppercase mb-4">PR Flow Direction</div>
+      <div class="flex items-center gap-3 text-sm flex-wrap">
+        <span class="text-purple-400 font-mono text-[13px]">feature/*</span>
+        <span class="text-gray-500">&rarr;</span>
+        <span class="text-teal-300 font-mono text-[13px]">dev</span>
+        <span class="text-gray-500">&rarr;</span>
+        <span class="text-amber-400 font-mono text-[13px]">staging</span>
+        <span class="text-gray-500">&rarr;</span>
+        <span class="text-green-400 font-mono text-[13px]">main</span>
+      </div>
+      <div class="text-[12px] text-gray-500 mt-3">Never develop directly on main, staging, or dev. Always branch.</div>
+    </div>
+  </section>
+
+  <!-- CI PIPELINE -->
+  <section id="ci" class="section">
+    <h2 class="text-[28px] font-bold mb-1.5 text-white">CI <span class="text-teal-300">Pipeline</span></h2>
+    <p class="text-sm text-gray-500 mb-9 max-w-[620px]">Three jobs run on every push and every PR. All must pass before merge.</p>
+
+    <div class="ci-pipeline">
+      <div class="ci-stage">
+        <div class="text-[10px] tracking-[0.2em] uppercase font-semibold mb-2.5 text-teal-300">1. Lint</div>
+        <ul class="ci-items ci-lint">
+          <li>black — formatting check</li>
+          <li>ruff — linting + auto-fix</li>
+          <li>Fails if code isn't formatted</li>
+        </ul>
+      </div>
+      <div class="ci-stage">
+        <div class="text-[10px] tracking-[0.2em] uppercase font-semibold mb-2.5 text-green-400">2. Test</div>
+        <ul class="ci-items ci-test">
+          <li>pytest with coverage</li>
+          <li>80% coverage threshold</li>
+          <li>HTML report + JUnit XML</li>
+          <li>Coverage summary in PR</li>
+        </ul>
+      </div>
+      <div class="ci-stage">
+        <div class="text-[10px] tracking-[0.2em] uppercase font-semibold mb-2.5 text-amber-400">3. Security</div>
+        <ul class="ci-items ci-sec">
+          <li>detect-secrets — leaked keys</li>
+          <li>pip-audit — dependency CVEs</li>
+          <li>bandit — Python code scan</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3 class="text-base font-semibold text-white mb-3.5">CI Outputs</h3>
+    <div class="cards-grid max-w-[800px]">
+      <div class="card">
+        <div class="text-[15px] font-semibold text-white mb-1.5">Test Results</div>
+        <div class="text-[13px] text-gray-500 leading-relaxed">Pass/fail summary on PR checks tab via JUnit XML. Download <code class="text-teal-400 text-xs">reports/test-report.html</code> for full detail.</div>
+      </div>
+      <div class="card">
+        <div class="text-[15px] font-semibold text-white mb-1.5">Coverage Map</div>
+        <div class="text-[13px] text-gray-500 leading-relaxed">Line-by-line coverage in <code class="text-teal-400 text-xs">reports/coverage/index.html</code>. Summary printed in GitHub Actions job summary.</div>
+      </div>
+      <div class="card">
+        <div class="text-[15px] font-semibold text-white mb-1.5">Security Report</div>
+        <div class="text-[13px] text-gray-500 leading-relaxed">Python code scan in <code class="text-teal-400 text-xs">reports/bandit-report.json</code>. Dependency vulnerabilities flagged inline.</div>
+      </div>
+    </div>
+    <div class="text-xs text-gray-500 mt-4">All artifacts retained for 30 days. Dependabot opens weekly PRs for dependency updates.</div>
+  </section>
+
+  <!-- TESTING -->
+  <section id="testing" class="section">
+    <h2 class="text-[28px] font-bold mb-1.5 text-white">Testing <span class="text-teal-300">Requirements</span></h2>
+    <p class="text-sm text-gray-500 mb-9 max-w-[620px]">Tests ship with code. Always. No exceptions.</p>
+
+    <div class="cards-grid mb-8">
+      <div class="card">
+        <div class="text-[22px] mb-3 text-green-400">+</div>
+        <div class="text-[15px] font-semibold text-white mb-1.5">New Feature</div>
+        <div class="text-[13px] text-gray-500 leading-relaxed">Unit tests + integration tests in the same PR as the feature code.</div>
+      </div>
+      <div class="card">
+        <div class="text-[22px] mb-3 text-red-400">!</div>
+        <div class="text-[15px] font-semibold text-white mb-1.5">Bug Fix</div>
+        <div class="text-[13px] text-gray-500 leading-relaxed">Write a test that reproduces the bug first. Then fix the code. Same PR.</div>
+      </div>
+      <div class="card">
+        <div class="text-[22px] mb-3 text-amber-400">~</div>
+        <div class="text-[15px] font-semibold text-white mb-1.5">Changed Behavior</div>
+        <div class="text-[13px] text-gray-500 leading-relaxed">Update existing tests to match the new behavior. Same PR.</div>
+      </div>
+      <div class="card">
+        <div class="text-[22px] mb-3 text-gray-500">-</div>
+        <div class="text-[15px] font-semibold text-white mb-1.5">Removed Feature</div>
+        <div class="text-[13px] text-gray-500 leading-relaxed">Remove the feature's tests. Don't leave dead tests behind. Same PR.</div>
+      </div>
+    </div>
+
+    <div class="diagram-box max-w-[600px]">
+      <div class="text-[12px] text-teal-400 font-semibold tracking-[0.15em] uppercase mb-5">The Testing Pyramid</div>
+      <div class="flex flex-col items-center gap-0">
+        <div class="w-[30%] py-3.5 text-center bg-purple-400/10 border border-purple-400/30 rounded-t-lg">
+          <div class="font-mono text-[13px] font-medium text-purple-400">E2E</div>
+          <div class="text-[11px] text-gray-500 mt-0.5">Few — full browser flows</div>
+        </div>
+        <div class="w-[62%] py-3.5 text-center bg-amber-400/10 border border-amber-400/25 border-t-0">
+          <div class="font-mono text-[13px] font-medium text-amber-400">Integration</div>
+          <div class="text-[11px] text-gray-500 mt-0.5">Moderate — API-level tests</div>
+        </div>
+        <div class="w-full py-3.5 text-center bg-green-400/10 border border-green-400/25 border-t-0 rounded-b-lg">
+          <div class="font-mono text-[13px] font-medium text-green-400">Unit Tests</div>
+          <div class="text-[11px] text-gray-500 mt-0.5">Many — pure logic, fast</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-[13px] text-gray-500 max-w-[600px] mt-5">
+      <strong class="text-gray-100">Quality over percentage.</strong> Prioritize error paths, boundary values, state transitions, and integration points. Don't waste time testing trivial getters or framework internals.
+    </div>
+    <div class="text-[13px] text-gray-500 max-w-[600px] mt-2.5">
+      <strong class="text-gray-100">Tests are permanent.</strong> They are regression tests. A future change that breaks an old test is the system working correctly.
+    </div>
+  </section>
+
+  <!-- PRE-COMMIT HOOKS -->
+  <section id="hooks" class="section">
+    <h2 class="text-[28px] font-bold mb-1.5 text-white">Pre-commit <span class="text-teal-300">Hooks</span></h2>
+    <p class="text-sm text-gray-500 mb-9 max-w-[620px]">Nine hooks run automatically before every commit. Catches problems before they reach CI.</p>
+
+    <table class="hooks-table">
+      <thead>
+        <tr><th>Hook</th><th>What It Does</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>trailing-whitespace</td><td>Removes trailing whitespace from all files</td></tr>
+        <tr><td>end-of-file-fixer</td><td>Ensures every file ends with a newline</td></tr>
+        <tr><td>check-yaml</td><td>Validates YAML syntax (catches CI config errors)</td></tr>
+        <tr><td>check-added-large-files</td><td>Blocks files over 500KB from being committed</td></tr>
+        <tr><td>check-merge-conflict</td><td>Catches unresolved merge conflict markers</td></tr>
+        <tr><td>detect-private-key</td><td>Prevents accidentally committing private keys</td></tr>
+        <tr><td>black</td><td>Auto-formats Python code to consistent style</td></tr>
+        <tr><td>ruff</td><td>Lints Python code and auto-fixes common issues</td></tr>
+        <tr><td>detect-secrets</td><td>Scans for API keys, passwords, and credentials</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- BUILD REPORT -->
+  <section id="report" class="section">
+    <h2 class="text-[28px] font-bold mb-1.5 text-white">Build <span class="text-teal-300">Report</span></h2>
+    <p class="text-sm text-gray-500 mb-9 max-w-[620px]">Every PR gets a consolidated build report posted as a sticky comment. Updates on each push. Full history preserved.</p>
+
+    <div class="diagram-box max-w-[650px]">
+      <div class="text-[12px] text-teal-400 font-semibold tracking-[0.15em] uppercase mb-4">What the Build Report Shows</div>
+      <div class="grid grid-cols-2 gap-5">
+        <div>
+          <div class="text-[13px] font-semibold text-white mb-2">Test Results</div>
+          <div class="font-mono text-xs leading-8">
+            <div><span class="text-green-400">Passed</span> <span class="text-gray-500 float-right">47</span></div>
+            <div><span class="text-red-400">Failed</span> <span class="text-gray-500 float-right">2</span></div>
+            <div><span class="text-amber-400">Skipped</span> <span class="text-gray-500 float-right">1</span></div>
+            <div><span class="text-gray-500">Errors</span> <span class="text-gray-500 float-right">0</span></div>
+            <div class="border-t border-teal-400/15 pt-1 mt-1"><span class="text-white">Total</span> <span class="text-gray-100 float-right">50</span></div>
+          </div>
+        </div>
+        <div>
+          <div class="text-[13px] font-semibold text-white mb-2">Coverage</div>
+          <div class="font-mono text-xs leading-8">
+            <div><span class="text-gray-100">Overall</span> <span class="text-green-400 float-right">87.3%</span></div>
+            <div><span class="text-gray-100">Threshold</span> <span class="text-gray-500 float-right">80%</span></div>
+          </div>
+          <div class="mt-3 text-[11px] text-gray-500">Files below 80% are listed individually with their coverage percentage.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cards-grid max-w-[650px] mt-7">
+      <div class="card">
+        <div class="text-[15px] font-semibold text-white mb-1.5">Sticky PR Comment</div>
+        <div class="text-[13px] text-gray-500 leading-relaxed">Report is posted as a comment directly on the PR. It updates on each push — you always see the latest results without leaving the PR page.</div>
+      </div>
+      <div class="card">
+        <div class="text-[15px] font-semibold text-white mb-1.5">Step Summary</div>
+        <div class="text-[13px] text-gray-500 leading-relaxed">Same report is written to GitHub Actions step summary. Every build is preserved in the Actions history for long-term reference.</div>
+      </div>
+      <div class="card">
+        <div class="text-[15px] font-semibold text-white mb-1.5">Failure Details</div>
+        <div class="text-[13px] text-gray-500 leading-relaxed">Failed tests are listed with their error messages directly in the report. No need to dig through CI logs to find what broke.</div>
+      </div>
+      <div class="card">
+        <div class="text-[15px] font-semibold text-white mb-1.5">Downloadable Artifacts</div>
+        <div class="text-[13px] text-gray-500 leading-relaxed">Full HTML test report, interactive coverage map, JUnit XML, and security scan results available as downloadable artifacts for 30 days.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REVIEW GATES -->
+  <section id="reviews" class="section">
+    <h2 class="text-[28px] font-bold mb-1.5 text-white">Review <span class="text-teal-300">Gates</span></h2>
+    <p class="text-sm text-gray-500 mb-9 max-w-[620px]">Every PR requires two independent reviews before merge. Code quality and test quality are reviewed separately by different roles.</p>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-8">
+      <div class="card !border-teal-400/30">
+        <div class="text-[10px] tracking-[0.2em] uppercase text-teal-400 font-semibold mb-3">Gate 1</div>
+        <div class="text-lg font-semibold text-white mb-3">Dev Lead Review</div>
+        <div class="text-[13px] text-gray-500 leading-relaxed">
+          <ul class="list-none flex flex-col gap-2 p-0">
+            <li class="flex gap-2 items-start"><span class="text-teal-400">&#9679;</span> Code follows project conventions and style</li>
+            <li class="flex gap-2 items-start"><span class="text-teal-400">&#9679;</span> Architecture and design are sound</li>
+            <li class="flex gap-2 items-start"><span class="text-teal-400">&#9679;</span> No unnecessary complexity or over-engineering</li>
+            <li class="flex gap-2 items-start"><span class="text-teal-400">&#9679;</span> Error handling is appropriate</li>
+            <li class="flex gap-2 items-start"><span class="text-teal-400">&#9679;</span> Logging follows the standard</li>
+            <li class="flex gap-2 items-start"><span class="text-teal-400">&#9679;</span> No security concerns</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card !border-green-400/30">
+        <div class="text-[10px] tracking-[0.2em] uppercase text-green-400 font-semibold mb-3">Gate 2</div>
+        <div class="text-lg font-semibold text-white mb-3">QA Lead Review</div>
+        <div class="text-[13px] text-gray-500 leading-relaxed">
+          <ul class="list-none flex flex-col gap-2 p-0">
+            <li class="flex gap-2 items-start"><span class="text-green-400">&#9679;</span> Tests cover the right scenarios (happy path, errors, edges)</li>
+            <li class="flex gap-2 items-start"><span class="text-green-400">&#9679;</span> Tests are meaningful — not testing trivial code</li>
+            <li class="flex gap-2 items-start"><span class="text-green-400">&#9679;</span> Test names clearly describe what they verify</li>
+            <li class="flex gap-2 items-start"><span class="text-green-400">&#9679;</span> Coverage has not dropped below 80%</li>
+            <li class="flex gap-2 items-start"><span class="text-green-400">&#9679;</span> No flaky or environment-dependent tests</li>
+            <li class="flex gap-2 items-start"><span class="text-green-400">&#9679;</span> Regression tests updated if behavior changed</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="diagram-box max-w-[650px]">
+      <div class="text-[12px] text-teal-400 font-semibold tracking-[0.15em] uppercase mb-4">Review Flow</div>
+      <div class="flex items-center gap-3 text-[13px] flex-wrap">
+        <span class="text-purple-400 font-mono">PR Created</span>
+        <span class="text-gray-500">&rarr;</span>
+        <span class="text-amber-400 font-mono">CI Passes</span>
+        <span class="text-gray-500">&rarr;</span>
+        <span class="text-teal-300 font-mono">Dev Lead Review</span>
+        <span class="text-gray-500">&rarr;</span>
+        <span class="text-green-400 font-mono">QA Lead Review</span>
+        <span class="text-gray-500">&rarr;</span>
+        <span class="text-white font-mono">Merge</span>
+      </div>
+      <div class="text-xs text-gray-500 mt-3.5">Both reviews must be completed and signed off in the PR template before merge. Neither is optional.</div>
+    </div>
+  </section>
+
+  <!-- NOTIFICATIONS -->
+  <section id="notify" class="section">
+    <h2 class="text-[28px] font-bold mb-1.5 text-white">Build <span class="text-teal-300">Notifications</span></h2>
+    <p class="text-sm text-gray-500 mb-9 max-w-[620px]">Every build sends a notification to Slack. Color-coded, with direct links. No news is not good news — you should always know what happened.</p>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-7">
+      <div class="card !border-l-[3px] !border-l-green-400">
+        <div class="text-[13px] font-semibold text-green-400 mb-2">Pass Notification</div>
+        <div class="bg-gray-800/50 rounded-lg p-3.5 text-xs leading-7">
+          <div class="text-green-400">&#10003; <strong class="text-gray-100">PR #42: Add audio extraction step</strong></div>
+          <div class="text-gray-500">All checks passed</div>
+          <div class="text-gray-500 text-[11px] italic">briborg &middot; imi-library &middot; 14:32 UTC</div>
+        </div>
+      </div>
+      <div class="card !border-l-[3px] !border-l-red-400">
+        <div class="text-[13px] font-semibold text-red-400 mb-2">Fail Notification</div>
+        <div class="bg-gray-800/50 rounded-lg p-3.5 text-xs leading-7">
+          <div class="text-red-400">&#10007; <strong class="text-gray-100">PR #43: Update transcription config</strong></div>
+          <div class="text-gray-500">Failed: test, security</div>
+          <div class="text-gray-500 text-[11px] italic">briborg &middot; imi-library &middot; 15:07 UTC</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="diagram-box max-w-[600px]">
+      <div class="text-[12px] text-teal-400 font-semibold tracking-[0.15em] uppercase mb-3.5">When Notifications Fire</div>
+      <table class="w-full text-[13px]">
+        <tr class="border-b border-teal-400/15">
+          <td class="py-2 text-gray-100 font-medium">PR opened / updated</td>
+          <td class="py-2 text-gray-500">CI result + PR link + author</td>
+        </tr>
+        <tr class="border-b border-teal-400/15">
+          <td class="py-2 text-gray-100 font-medium">Push to dev</td>
+          <td class="py-2 text-gray-500">CI result + commit link + author</td>
+        </tr>
+        <tr class="border-b border-teal-400/15">
+          <td class="py-2 text-gray-100 font-medium">Push to staging</td>
+          <td class="py-2 text-gray-500">CI result + commit link + author</td>
+        </tr>
+        <tr>
+          <td class="py-2 text-gray-100 font-medium">Push to main</td>
+          <td class="py-2 text-gray-500">Deploy notice + commit link + author</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="mt-6 max-w-[600px]">
+      <div class="text-[15px] font-semibold text-white mb-2.5">How to Activate</div>
+      <div class="flow">
+        <div class="flow-step mini">
+          <div class="flow-num mini">1</div>
+          <div class="flow-body mini">
+            <div class="text-[13px] text-gray-100">Create a Slack incoming webhook (Apps &rarr; Incoming Webhooks &rarr; Add to channel)</div>
+          </div>
+        </div>
+        <div class="flow-step mini">
+          <div class="flow-num mini">2</div>
+          <div class="flow-body mini">
+            <div class="text-[13px] text-gray-100">Add webhook URL as a GitHub Actions secret: <code class="text-teal-400 text-xs">SLACK_WEBHOOK_URL</code></div>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-num mini">3</div>
+          <div class="flow-body mini">
+            <div class="text-[13px] text-gray-100">Done — notifications start automatically on the next CI run</div>
+          </div>
+        </div>
+      </div>
+      <div class="text-xs text-gray-500 mt-3">The notification job is pre-wired in CI from setup.sh. It skips gracefully if the secret isn't set — nothing breaks.</div>
+    </div>
+  </section>
+
+  <!-- DEFINITION OF DONE -->
+  <section id="dod" class="section">
+    <h2 class="text-[28px] font-bold mb-1.5 text-white">Definition of <span class="text-teal-300">Done</span></h2>
+    <p class="text-sm text-gray-500 mb-9 max-w-[620px]">A feature is complete when every box is checked. Not before.</p>
+
+    <ul class="checklist">
+      <li><span class="check-box">&#10003;</span>Code is written and follows project conventions (black, ruff clean)</li>
+      <li><span class="check-box">&#10003;</span>Unit tests + integration tests included in the same PR</li>
+      <li><span class="check-box">&#10003;</span>All tests pass locally (<code class="text-teal-400 text-[13px]">pytest -v</code>)</li>
+      <li><span class="check-box">&#10003;</span>Coverage has not dropped below 80%</li>
+      <li><span class="check-box">&#10003;</span>PR description follows the template (what, why, how to test, checklist)</li>
+      <li><span class="check-box">&#10003;</span>CI passes — lint + test + security scan</li>
+      <li><span class="check-box">&#10003;</span>Build report shows no regressions</li>
+      <li><span class="check-box">&#10003;</span>Dev Lead has reviewed and approved (code quality)</li>
+      <li><span class="check-box">&#10003;</span>QA Lead has reviewed and approved (test quality)</li>
+      <li><span class="check-box">&#10003;</span>CHANGELOG.md is updated</li>
+      <li><span class="check-box">&#10003;</span>PR is reviewed and merged via GitHub</li>
+      <li><span class="check-box">&#10003;</span>Linked requirement or issue is updated or closed</li>
+    </ul>
+  </section>
+
+  <!-- FULL TOOLBOX -->
+  <section id="toolbox" class="section">
+    <h2 class="text-[28px] font-bold mb-1.5 text-white">Full <span class="text-teal-300">Toolbox</span></h2>
+    <p class="text-sm text-gray-500 mb-9 max-w-[620px]">Everything that ships with the project template. One setup script installs all of it.</p>
+
+    <div class="cards-grid">
+      <div class="card">
+        <div class="text-[22px] mb-3">&#9881;</div>
+        <div class="text-[15px] font-semibold text-white mb-1.5">Git Configuration</div>
+        <div class="text-[13px] text-gray-500 leading-relaxed"><code class="text-teal-400 text-[11px]">fetch.prune = true</code> auto-cleans stale remote refs. <code class="text-teal-400 text-[11px]">git-done</code> alias for post-merge cleanup.</div>
+      </div>
+      <div class="card">
+        <div class="text-[22px] mb-3">&#9878;</div>
+        <div class="text-[15px] font-semibold text-white mb-1.5">GitHub Actions CI</div>
+        <div class="text-[13px] text-gray-500 leading-relaxed">Auto-detects Python, Node, or full-stack. Generates <code class="text-teal-400 text-[11px]">ci.yml</code> with lint + test + security. Triggers on main/dev/staging.</div>
+      </div>
+      <div class="card">
+        <div class="text-[22px] mb-3">&#128274;</div>
+        <div class="text-[15px] font-semibold text-white mb-1.5">Pre-commit Hooks</div>
+        <div class="text-[13px] text-gray-500 leading-relaxed">9 hooks: formatting (black), linting (ruff), secret detection, large file guard, YAML validation, merge conflict check.</div>
+      </div>
+      <div class="card">
+        <div class="text-[22px] mb-3">&#128196;</div>
+        <div class="text-[15px] font-semibold text-white mb-1.5">PR Template</div>
+        <div class="text-[13px] text-gray-500 leading-relaxed">Standardized PR format: what changed, why, how to test, checklist. Auto-fills on every new PR.</div>
+      </div>
+      <div class="card">
+        <div class="text-[22px] mb-3">&#128209;</div>
+        <div class="text-[15px] font-semibold text-white mb-1.5">ADR Template</div>
+        <div class="text-[13px] text-gray-500 leading-relaxed">Architecture Decision Records in <code class="text-teal-400 text-[11px]">docs/decisions/</code>. Context, options, decision, consequences.</div>
+      </div>
+      <div class="card">
+        <div class="text-[22px] mb-3">&#128300;</div>
+        <div class="text-[15px] font-semibold text-white mb-1.5">Dependabot</div>
+        <div class="text-[13px] text-gray-500 leading-relaxed">Weekly checks for pip + GitHub Actions dependency updates. Opens PRs automatically with "dependencies" label.</div>
+      </div>
+      <div class="card">
+        <div class="text-[22px] mb-3">&#128221;</div>
+        <div class="text-[15px] font-semibold text-white mb-1.5">CHANGELOG.md</div>
+        <div class="text-[13px] text-gray-500 leading-relaxed">Keep a Changelog format with semantic versioning. Updated in every PR that changes behavior.</div>
+      </div>
+      <div class="card">
+        <div class="text-[22px] mb-3">&#128269;</div>
+        <div class="text-[15px] font-semibold text-white mb-1.5">Security Scanning</div>
+        <div class="text-[13px] text-gray-500 leading-relaxed">detect-secrets (leaked keys), pip-audit (dependency CVEs), bandit (Python code security). All in CI.</div>
+      </div>
+      <div class="card">
+        <div class="text-[22px] mb-3">&#128200;</div>
+        <div class="text-[15px] font-semibold text-white mb-1.5">Test Reports</div>
+        <div class="text-[13px] text-gray-500 leading-relaxed">HTML test report, interactive coverage map, JUnit XML for PR summaries. 30-day artifact retention.</div>
+      </div>
+      <div class="card">
+        <div class="text-[22px] mb-3">&#128203;</div>
+        <div class="text-[15px] font-semibold text-white mb-1.5">Logging Standard</div>
+        <div class="text-[13px] text-gray-500 leading-relaxed">Python <code class="text-teal-400 text-[11px]">logging</code> module only. DEBUG / INFO / WARNING / ERROR. Always include context.</div>
+      </div>
+      <div class="card">
+        <div class="text-[22px] mb-3">&#128230;</div>
+        <div class="text-[15px] font-semibold text-white mb-1.5">pyproject.toml</div>
+        <div class="text-[13px] text-gray-500 leading-relaxed">Centralized config for black, ruff, and pytest. Coverage threshold, HTML reports, JUnit XML all pre-configured.</div>
+      </div>
+      <div class="card">
+        <div class="text-[22px] mb-3">&#128462;</div>
+        <div class="text-[15px] font-semibold text-white mb-1.5">Deliverables</div>
+        <div class="text-[13px] text-gray-500 leading-relaxed">Every HTML doc also saved as PDF (Chrome headless). PDF is the shareable format for Drive and external teams.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="mt-16 py-12 border-t border-gray-800">
+    <div class="max-w-5xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-2 text-xs text-gray-500 tracking-wide">
+      <span>Brian Borg's Dev Process Template</span>
+      <span>Last updated March 2026</span>
+    </div>
+  </footer>
+</Layout>
+
+<style>
+  /* JetBrains Mono for code elements */
+  .font-mono, code {
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  /* Hero glow */
+  .hero-glow {
+    background: radial-gradient(ellipse 70% 50% at 80% 40%, rgba(45,212,191,0.08) 0%, transparent 70%),
+                radial-gradient(ellipse 40% 70% at 10% 60%, rgba(167,139,250,0.06) 0%, transparent 60%);
+  }
+
+  /* Pills */
+  .pill-teal {
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+    background: rgba(45,212,191,0.1);
+    border: 1px solid rgba(45,212,191,0.3);
+    color: rgb(94,234,212);
+  }
+  .pill-green {
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+    background: rgba(74,222,128,0.1);
+    border: 1px solid rgba(74,222,128,0.3);
+    color: rgb(74,222,128);
+  }
+  .pill-purple {
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+    background: rgba(167,139,250,0.1);
+    border: 1px solid rgba(167,139,250,0.3);
+    color: rgb(167,139,250);
+  }
+  .pill-amber {
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+    background: rgba(245,158,11,0.1);
+    border: 1px solid rgba(245,158,11,0.3);
+    color: rgb(245,158,11);
+  }
+
+  /* Nav buttons */
+  .nav-btn {
+    padding: 14px 18px;
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    color: rgb(100,116,139);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.2s;
+  }
+  .nav-btn:hover { color: rgb(226,232,240); }
+  .nav-btn.active { color: rgb(45,212,191); border-bottom-color: rgb(45,212,191); }
+
+  /* Sections */
+  .section {
+    display: none;
+    padding: 50px 24px;
+    max-width: 1100px;
+    margin: 0 auto;
+    animation: fadeIn 0.25s ease;
+  }
+  .section.active { display: block; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+  @media (min-width: 768px) {
+    .section { padding: 50px 60px; }
+  }
+
+  /* Flow diagram */
+  .flow {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    position: relative;
+  }
+  .flow-step {
+    display: grid;
+    grid-template-columns: 64px 1fr;
+    gap: 0 20px;
+    position: relative;
+  }
+  .flow-step:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    left: 31px;
+    top: 64px;
+    bottom: -4px;
+    width: 2px;
+    background: linear-gradient(to bottom, rgb(45,212,191), rgba(45,212,191,0.2));
+  }
+  .flow-step.mini:not(:last-child)::after {
+    top: 40px;
+    left: 19px;
+  }
+  .flow-num {
+    width: 64px;
+    height: 64px;
+    border-radius: 14px;
+    background: rgb(28,31,46);
+    border: 2px solid rgb(45,212,191);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 18px;
+    font-weight: 600;
+    color: rgb(94,234,212);
+    flex-shrink: 0;
+    position: relative;
+    z-index: 1;
+  }
+  .flow-num.mini {
+    width: 40px;
+    height: 40px;
+    font-size: 14px;
+    border-radius: 10px;
+  }
+  .flow-body {
+    padding: 14px 0 44px;
+  }
+  .flow-body.mini {
+    padding: 6px 0 24px;
+  }
+  .flow-title {
+    font-size: 17px;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 6px;
+  }
+  .flow-desc {
+    font-size: 13px;
+    color: rgb(100,116,139);
+    margin-bottom: 10px;
+    max-width: 560px;
+    line-height: 1.7;
+  }
+  .flow-cmd {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    background: rgb(28,31,46);
+    border: 1px solid rgba(45,212,191,0.15);
+    border-radius: 8px;
+    padding: 10px 14px;
+    color: rgb(74,222,128);
+    max-width: 520px;
+    margin-bottom: 8px;
+    overflow-x: auto;
+  }
+  .flow-note {
+    font-size: 12px;
+    color: rgb(245,158,11);
+    padding: 8px 14px;
+    border-left: 2px solid rgb(245,158,11);
+    background: rgba(245,158,11,0.05);
+    border-radius: 0 6px 6px 0;
+    max-width: 520px;
+    margin-top: 8px;
+  }
+
+  /* Diagram box (branch diagrams, etc) */
+  .diagram-box {
+    background: rgb(22,25,34);
+    border: 1px solid rgba(45,212,191,0.15);
+    border-radius: 14px;
+    padding: 32px;
+  }
+  .branch-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(45,212,191,0.08);
+  }
+  .branch-row:last-child {
+    border-bottom: none;
+  }
+
+  /* Cards grid */
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+  }
+  .card {
+    background: rgb(22,25,34);
+    border: 1px solid rgba(45,212,191,0.15);
+    border-radius: 12px;
+    padding: 22px;
+    transition: border-color 0.2s;
+  }
+  .card:hover { border-color: rgba(45,212,191,0.35); }
+
+  /* CI Pipeline */
+  .ci-pipeline {
+    display: flex;
+    gap: 0;
+    align-items: stretch;
+    margin-bottom: 28px;
+    flex-wrap: wrap;
+  }
+  .ci-stage {
+    flex: 1;
+    min-width: 200px;
+    background: rgb(22,25,34);
+    border: 1px solid rgba(45,212,191,0.15);
+    padding: 24px;
+    position: relative;
+  }
+  .ci-stage:first-child { border-radius: 12px 0 0 12px; }
+  .ci-stage:last-child { border-radius: 0 12px 12px 0; }
+  .ci-stage:not(:last-child)::after {
+    content: '>';
+    position: absolute;
+    right: -8px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 18px;
+    color: rgb(45,212,191);
+    z-index: 2;
+    background: rgb(3,7,18);
+    width: 16px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .ci-items {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 0;
+  }
+  .ci-items li {
+    font-size: 12px;
+    color: rgb(100,116,139);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .ci-items li::before {
+    content: '';
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .ci-lint li::before { background: rgb(94,234,212); }
+  .ci-test li::before { background: rgb(74,222,128); }
+  .ci-sec li::before { background: rgb(245,158,11); }
+
+  @media (max-width: 768px) {
+    .ci-pipeline { flex-direction: column; }
+    .ci-stage { border-radius: 0 !important; }
+    .ci-stage:not(:last-child)::after { display: none; }
+  }
+
+  /* Checklist */
+  .checklist {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 600px;
+    padding: 0;
+  }
+  .checklist li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 14px;
+    color: rgb(226,232,240);
+    line-height: 1.5;
+  }
+  .check-box {
+    width: 22px;
+    height: 22px;
+    border-radius: 5px;
+    border: 2px solid rgb(74,222,128);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+    font-size: 12px;
+    color: rgb(74,222,128);
+  }
+
+  /* Hooks table */
+  .hooks-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 24px;
+    max-width: 700px;
+  }
+  .hooks-table th {
+    text-align: left;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgb(45,212,191);
+    padding: 10px 16px;
+    border-bottom: 2px solid rgba(45,212,191,0.15);
+    font-weight: 600;
+  }
+  .hooks-table td {
+    font-size: 13px;
+    padding: 10px 16px;
+    border-bottom: 1px solid rgba(45,212,191,0.06);
+  }
+  .hooks-table td:first-child {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: rgb(45,212,191);
+    white-space: nowrap;
+  }
+  .hooks-table td:last-child { color: rgb(100,116,139); }
+</style>
+
+<script is:inline>
+  function show(id, btn) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    btn.classList.add('active');
+  }
+</script>

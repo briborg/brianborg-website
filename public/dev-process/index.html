@@ -472,7 +472,8 @@
 
 <!-- NAV -->
 <nav class="sticky-nav">
-  <button class="nav-btn active" onclick="show('workflow', this)">Daily Workflow</button>
+  <button class="nav-btn active" onclick="show('reqs', this)">Requirements</button>
+  <button class="nav-btn" onclick="show('workflow', this)">Daily Workflow</button>
   <button class="nav-btn" onclick="show('branching', this)">Branching</button>
   <button class="nav-btn" onclick="show('ci', this)">CI Pipeline</button>
   <button class="nav-btn" onclick="show('testing', this)">Testing</button>
@@ -484,8 +485,70 @@
   <button class="nav-btn" onclick="show('toolbox', this)">Full Toolbox</button>
 </nav>
 
+<!-- REQUIREMENTS -->
+<section id="reqs" class="section active">
+  <h2 class="section-title">Requirements <span>Management</span></h2>
+  <p class="section-intro">GitHub Issues is the single source of truth for all requirements. One unbroken chain from requirement to deployment.</p>
+
+  <div class="branch-diagram" style="max-width:700px;">
+    <div style="font-size:12px;color:var(--blue);font-weight:600;letter-spacing:0.15em;text-transform:uppercase;margin-bottom:16px;">Traceability Chain</div>
+    <div style="display:flex;align-items:center;gap:10px;font-size:13px;flex-wrap:wrap;">
+      <span style="color:var(--amber);font-family:'JetBrains Mono',monospace;">Issue #12</span>
+      <span style="color:var(--muted);">&rarr;</span>
+      <span style="color:var(--purple);font-family:'JetBrains Mono',monospace;">feature/12-transcode</span>
+      <span style="color:var(--muted);">&rarr;</span>
+      <span style="color:var(--blue-light);font-family:'JetBrains Mono',monospace;">PR "Closes #12"</span>
+      <span style="color:var(--muted);">&rarr;</span>
+      <span style="color:var(--green);font-family:'JetBrains Mono',monospace;">CI passes</span>
+      <span style="color:var(--muted);">&rarr;</span>
+      <span style="color:#fff;font-family:'JetBrains Mono',monospace;">Merge &amp; auto-close</span>
+    </div>
+    <div style="font-size:12px;color:var(--muted);margin-top:12px;">Issue number appears in the branch, the PR, the tests, and the commit history. Full traceability, zero extra tooling.</div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));gap:16px;margin-top:24px;">
+    <div class="card" style="border-color:rgba(74,222,128,0.3);">
+      <div style="font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--green);font-weight:600;margin-bottom:10px;">Template</div>
+      <div class="card-title">Feature Request</div>
+      <div class="card-body">
+        <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:6px;">
+          <li style="display:flex;gap:8px;"><span style="color:var(--green);">&#9679;</span> Summary (user story format)</li>
+          <li style="display:flex;gap:8px;"><span style="color:var(--green);">&#9679;</span> Specific, testable requirements</li>
+          <li style="display:flex;gap:8px;"><span style="color:var(--green);">&#9679;</span> Acceptance criteria (Given/When/Then)</li>
+          <li style="display:flex;gap:8px;"><span style="color:var(--green);">&#9679;</span> Pipeline step &amp; priority</li>
+          <li style="display:flex;gap:8px;"><span style="color:var(--green);">&#9679;</span> Technical notes &amp; dependencies</li>
+        </ul>
+      </div>
+    </div>
+    <div class="card" style="border-color:rgba(239,68,68,0.3);">
+      <div style="font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--red);font-weight:600;margin-bottom:10px;">Template</div>
+      <div class="card-title">Bug Report</div>
+      <div class="card-body">
+        <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:6px;">
+          <li style="display:flex;gap:8px;"><span style="color:var(--red);">&#9679;</span> What happened</li>
+          <li style="display:flex;gap:8px;"><span style="color:var(--red);">&#9679;</span> Steps to reproduce</li>
+          <li style="display:flex;gap:8px;"><span style="color:var(--red);">&#9679;</span> Expected vs actual behavior</li>
+          <li style="display:flex;gap:8px;"><span style="color:var(--red);">&#9679;</span> Pipeline step &amp; severity</li>
+        </ul>
+      </div>
+    </div>
+    <div class="card">
+      <div style="font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--blue);font-weight:600;margin-bottom:10px;">Organization</div>
+      <div class="card-title">Labels &amp; Milestones</div>
+      <div class="card-body">
+        <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:6px;">
+          <li style="display:flex;gap:8px;"><span style="color:var(--blue);">&#9679;</span> Phase labels (phase-1, phase-2, phase-3)</li>
+          <li style="display:flex;gap:8px;"><span style="color:var(--blue);">&#9679;</span> Type labels (pipeline, schema, infra)</li>
+          <li style="display:flex;gap:8px;"><span style="color:var(--blue);">&#9679;</span> Priority labels (high, medium, low)</li>
+          <li style="display:flex;gap:8px;"><span style="color:var(--blue);">&#9679;</span> Milestones map to project phases</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- DAILY WORKFLOW -->
-<section id="workflow" class="section active">
+<section id="workflow" class="section">
   <h2 class="section-title">Daily <span>Workflow</span></h2>
   <p class="section-intro">Eight steps from starting work to clean-up. Every feature, every bug fix, every time.</p>
 

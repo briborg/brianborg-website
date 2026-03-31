@@ -15,9 +15,13 @@ const { title } = Astro.props;
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content="Brian Borg — QA leader, founder of OnPath Testing, builder of things." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
     <title>{title}</title>
+    <slot name="head" />
   </head>
-  <body class="bg-gray-950 text-gray-100 min-h-screen">
+  <body class="bg-[#1a1714] text-stone-100 min-h-screen font-sans">
     <slot />
   </body>
 </html>

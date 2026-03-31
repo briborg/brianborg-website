@@ -6,38 +6,65 @@ const { hero, about, services, testimonials, career, recognition, connect } = si
 
 function renderMarkdown(text: string): string {
   return text
-    .replace(/\*\*(.+?)\*\*/g, '<strong class="text-gray-100">$1</strong>')
+    .replace(/\*\*(.+?)\*\*/g, '<strong class="text-stone-100">$1</strong>')
     .replace(/\*(.+?)\*/g, '<em>$1</em>');
 }
 ---
 
 <Layout title="Brian Borg — Builder, Founder, Quality Obsessive">
-  <!-- Hero -->
-  <header class="min-h-[70vh] flex items-center">
-    <div class="max-w-3xl mx-auto px-6 py-24">
-      <div class="flex flex-col md:flex-row md:items-center gap-8 mb-10">
-        <img
-          src="/brian-borg.jpg"
-          alt="Brian Borg"
-          class="w-36 h-36 rounded-full object-cover object-[center_30%] border-2 border-teal-400/30 shrink-0"
-        />
-        <div>
-          <p class="text-teal-400 font-medium mb-2 tracking-wide uppercase text-sm">Hey, I'm</p>
-          <h1 class="text-5xl md:text-6xl font-bold leading-tight">Brian Borg</h1>
-        </div>
+  <!-- Nav -->
+  <nav class="fixed top-0 left-0 right-0 z-50 bg-[#1a1714]/90 backdrop-blur-md border-b border-stone-800/40">
+    <div class="max-w-6xl mx-auto px-6 flex items-center justify-between h-16">
+      <a href="/" class="font-serif text-xl font-bold text-stone-100 tracking-tight">Brian Borg</a>
+      <div class="hidden md:flex items-center gap-8 text-sm tracking-wide uppercase text-stone-400">
+        <a href="#about" class="hover:text-amber-400 transition-colors">About</a>
+        <a href="#work" class="hover:text-amber-400 transition-colors">Services</a>
+        <a href="#testimonials" class="hover:text-amber-400 transition-colors">Clients</a>
+        <a href="#journey" class="hover:text-amber-400 transition-colors">Journey</a>
+        <a href="#connect" class="hover:text-amber-400 transition-colors">Contact</a>
       </div>
-      <p class="text-xl md:text-2xl text-gray-300 mb-8 leading-relaxed" set:html={renderMarkdown(hero.tagline)} />
-      <p class="text-lg text-gray-400">
-        <Fragment set:html={renderMarkdown(hero.subtitle)} />
-      </p>
+    </div>
+  </nav>
+
+  <!-- Hero — full-bleed image with text overlay -->
+  <header class="relative min-h-[45vh] flex items-end">
+    <img
+      src="/photos/hero.jpg"
+      alt="Brian Borg"
+      class="absolute inset-0 w-full h-full object-cover object-[center_40%]"
+    />
+    <div class="absolute inset-0 bg-gradient-to-t from-[#1a1714] via-[#1a1714]/60 to-transparent"></div>
+    <div class="relative max-w-6xl mx-auto px-6 pb-20 w-full">
+      <h1 class="font-serif text-6xl md:text-8xl font-bold leading-none tracking-tight mb-6">
+        Passions &<br />Personality.
+      </h1>
+      <p class="text-xl md:text-2xl text-stone-300 max-w-2xl leading-relaxed" set:html={renderMarkdown(hero.subtitle)} />
     </div>
   </header>
 
+  <!-- Intro — two-column: photo left, text right -->
+  <section class="py-24">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center">
+        <img
+          src="/photos/himalayas.jpg"
+          alt="Brian Borg in the Indian Himalayas"
+          class="w-full rounded-lg shadow-lg shadow-amber-900/10"
+        />
+        <div>
+          <p class="section-label mb-4">A few things about me</p>
+          <h2 class="font-serif text-3xl md:text-4xl font-bold mb-6 text-stone-50">{about.heading}</h2>
+          <p class="text-lg text-stone-300 leading-relaxed" set:html={renderMarkdown(hero.tagline)} />
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- About -->
-  <section id="about" class="py-20 border-t border-gray-800">
+  <section id="about" class="py-24 border-t border-stone-800/60">
     <div class="max-w-3xl mx-auto px-6">
-      <h2 class="text-3xl font-bold mb-8">{about.heading}</h2>
-      <div class="space-y-5 text-lg text-gray-300 leading-relaxed">
+      <p class="section-label mb-4">This is me in a nutshell</p>
+      <div class="space-y-6 text-lg text-stone-300 leading-relaxed">
         {about.paragraphs.map((p: string) => (
           <p set:html={renderMarkdown(p)} />
         ))}
@@ -46,31 +73,44 @@ function renderMarkdown(text: string): string {
   </section>
 
   <!-- What I Do -->
-  <section id="work" class="py-20 border-t border-gray-800">
+  <section id="work" class="py-24 border-t border-stone-800/60">
     <div class="max-w-3xl mx-auto px-6">
-      <h2 class="text-3xl font-bold mb-8">What I do</h2>
-      <div class="space-y-10">
+      <p class="section-label mb-4">Services</p>
+      <h2 class="font-serif text-4xl font-bold mb-12 text-stone-50">What I do</h2>
+      <div class="space-y-12">
         {services.map((svc: { title: string; description: string }) => (
           <div>
-            <h3 class="text-xl font-semibold text-teal-400 mb-3">{svc.title}</h3>
-            <p class="text-lg text-gray-300 leading-relaxed">{svc.description}</p>
+            <h3 class="text-xl font-semibold text-amber-400 mb-3">{svc.title}</h3>
+            <p class="text-lg text-stone-300 leading-relaxed">{svc.description}</p>
           </div>
         ))}
       </div>
     </div>
   </section>
 
+  <!-- Photo Break -->
+  <section class="py-12">
+    <div class="max-w-6xl mx-auto px-6">
+      <img
+        src="/photos/rock.jpg"
+        alt="Brian Borg"
+        class="w-full rounded-lg shadow-lg shadow-amber-900/10"
+      />
+    </div>
+  </section>
+
   <!-- Testimonials -->
-  <section id="testimonials" class="py-20 border-t border-gray-800">
+  <section id="testimonials" class="py-24 border-t border-stone-800/60">
     <div class="max-w-3xl mx-auto px-6">
-      <h2 class="text-3xl font-bold mb-10">What clients say</h2>
-      <div class="space-y-10">
+      <p class="section-label mb-4">Testimonials</p>
+      <h2 class="font-serif text-4xl font-bold mb-12 text-stone-50">What clients say</h2>
+      <div class="space-y-14">
         {testimonials.map((t: { quote: string; author: string; role: string }) => (
-          <blockquote class="border-l-2 border-teal-400/50 pl-6">
-            <p class="text-lg text-gray-300 italic leading-relaxed mb-3">
-              "{t.quote}"
+          <blockquote class="border-l-2 border-amber-400/40 pl-8">
+            <p class="font-serif text-xl md:text-2xl text-stone-200 italic leading-relaxed mb-4">
+              &ldquo;{t.quote}&rdquo;
             </p>
-            <cite class="text-gray-500 not-italic">— {t.author}, {t.role}</cite>
+            <cite class="text-stone-500 not-italic text-sm tracking-wide uppercase">&mdash; {t.author}, {t.role}</cite>
           </blockquote>
         ))}
       </div>
@@ -78,16 +118,17 @@ function renderMarkdown(text: string): string {
   </section>
 
   <!-- Career Timeline -->
-  <section id="journey" class="py-20 border-t border-gray-800">
+  <section id="journey" class="py-24 border-t border-stone-800/60">
     <div class="max-w-3xl mx-auto px-6">
-      <h2 class="text-3xl font-bold mb-10">The journey</h2>
-      <div class="space-y-6">
+      <p class="section-label mb-4">Timeline</p>
+      <h2 class="font-serif text-4xl font-bold mb-12 text-stone-50">The journey</h2>
+      <div class="space-y-8">
         {career.map((c: { period: string; title: string; description: string }) => (
           <div class="flex gap-6">
-            <div class="text-teal-400 font-mono text-sm pt-1 w-24 shrink-0">{c.period}</div>
+            <div class="text-amber-400/80 font-mono text-sm pt-1 w-24 shrink-0">{c.period}</div>
             <div>
-              <h3 class="font-semibold text-gray-100">{c.title}</h3>
-              <p class="text-gray-400">{c.description}</p>
+              <h3 class="font-semibold text-stone-100 mb-1">{c.title}</h3>
+              <p class="text-stone-400 leading-relaxed">{c.description}</p>
             </div>
           </div>
         ))}
@@ -96,37 +137,47 @@ function renderMarkdown(text: string): string {
   </section>
 
   <!-- Recognition -->
-  <section id="recognition" class="py-20 border-t border-gray-800">
+  <section id="recognition" class="py-24 border-t border-stone-800/60">
     <div class="max-w-3xl mx-auto px-6">
-      <h2 class="text-3xl font-bold mb-8">Recognition</h2>
-      <ul class="space-y-3 text-lg text-gray-300">
+      <p class="section-label mb-4">Recognition</p>
+      <h2 class="font-serif text-4xl font-bold mb-10 text-stone-50">Recognition</h2>
+      <ul class="space-y-4 text-lg text-stone-300">
         {recognition.map((item: string) => (
-          <li>{item}</li>
+          <li class="flex items-start gap-3">
+            <span class="text-amber-400/60 mt-1.5 text-xs">&#9670;</span>
+            <span>{item}</span>
+          </li>
         ))}
       </ul>
     </div>
   </section>
 
   <!-- Connect -->
-  <section id="connect" class="py-20 border-t border-gray-800">
+  <section id="connect" class="py-24 border-t border-stone-800/60">
     <div class="max-w-3xl mx-auto px-6">
-      <h2 class="text-3xl font-bold mb-6">{connect.heading}</h2>
-      <p class="text-lg text-gray-300 mb-8 leading-relaxed">{connect.text}</p>
-      <a href={`mailto:${connect.email}`} class="inline-block bg-teal-500 hover:bg-teal-400 text-gray-950 font-semibold px-6 py-3 rounded-lg transition-colors mb-8">
+      <p class="section-label mb-4">Get in touch</p>
+      <h2 class="font-serif text-4xl font-bold mb-8 text-stone-50">{connect.heading}</h2>
+      <p class="text-lg text-stone-300 mb-10 leading-relaxed">{connect.text}</p>
+      <a href={`mailto:${connect.email}`} class="inline-block bg-amber-500 hover:bg-amber-400 text-stone-950 font-semibold px-7 py-3.5 rounded-lg transition-colors mb-10 shadow-lg shadow-amber-900/20">
         {connect.email}
       </a>
       <div class="flex flex-wrap gap-6 text-lg">
         {connect.links.map((link: { label: string; url: string }) => (
-          <a href={link.url} target="_blank" rel="noopener" class="text-teal-400 hover:text-teal-300 transition-colors">{link.label}</a>
+          <a href={link.url} target="_blank" rel="noopener" class="text-amber-400 hover:text-amber-300 transition-colors">{link.label}</a>
         ))}
       </div>
     </div>
   </section>
 
   <!-- Footer -->
-  <footer class="py-10 border-t border-gray-800">
-    <div class="max-w-3xl mx-auto px-6 text-gray-600 text-sm">
-      &copy; {new Date().getFullYear()} Brian Borg. Boulder, CO.
+  <footer class="py-12 border-t border-stone-800/60">
+    <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center text-stone-600 text-sm">
+      <span>&copy; {new Date().getFullYear()} Brian Borg. Boulder, CO.</span>
+      <div class="flex gap-6 mt-4 md:mt-0">
+        {connect.links.map((link: { label: string; url: string }) => (
+          <a href={link.url} target="_blank" rel="noopener" class="hover:text-stone-400 transition-colors">{link.label}</a>
+        ))}
+      </div>
     </div>
   </footer>
 </Layout>
