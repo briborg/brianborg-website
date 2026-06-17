@@ -1,0 +1,32 @@
+name: X — Generate Posts
+
+on:
+  schedule:
+    # Monday 2:03pm UTC = 8:03am MT — a week's batch of X posts, emailed for review
+    - cron: '3 14 * * 1'
+  workflow_dispatch:
+    inputs:
+      count:
+        description: 'How many posts to generate'
+        default: '7'
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install -r social/requirements.txt
+
+      - name: Generate X posts and email for review
+        run: python social/scripts/generate_x_posts.py --count "${{ github.event.inputs.count || '7' }}" --email
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          GMAIL_USER: ${{ secrets.GMAIL_USER }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          REVIEW_EMAIL_TO: ${{ secrets.REVIEW_EMAIL_TO }}

@@ -1,0 +1,32 @@
+name: X — Daily Engage List
+
+on:
+  schedule:
+    # Every day 1:00pm UTC = 7:00am MT — accounts to follow + reply to, emailed
+    - cron: '0 13 * * *'
+  workflow_dispatch:
+    inputs:
+      count:
+        description: 'How many accounts today'
+        default: '12'
+
+jobs:
+  engage:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install -r social/requirements.txt
+
+      - name: Build engage-list and email it
+        run: python social/scripts/build_engage_list.py --count "${{ github.event.inputs.count || '12' }}" --email
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          GMAIL_USER: ${{ secrets.GMAIL_USER }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          REVIEW_EMAIL_TO: ${{ secrets.REVIEW_EMAIL_TO }}

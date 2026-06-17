@@ -1,0 +1,36 @@
+{
+  "_comment": "Curated seed list of top tech accounts for the daily engage-list. Edit freely. The engage-list script rotates a daily subset and drafts a reply angle for each in Brian's voice. 'why' is the relevance hook; keep it specific. Handles are without the @.",
+  "_growth_note": "This is the SAFE growth path: a human-paced follow + reply list, not an auto-follow bot. You act on it manually.",
+  "categories": {
+    "ai_builders": [
+      {"handle": "karpathy", "name": "Andrej Karpathy", "why": "AI/LLM foundational voice; his takes on model behavior are perfect for Brian's 'trust but verify the AI' angle"},
+      {"handle": "simonw", "name": "Simon Willison", "why": "Builds in public with LLMs constantly; overlaps directly with Brian's building-in-public-with-AI lane"},
+      {"handle": "swyx", "name": "swyx", "why": "AI engineering community hub; good for thoughtful replies on the AI-dev workflow shift"},
+      {"handle": "amasad", "name": "Amjad Masad", "why": "Replit founder; agents writing/running code is squarely Brian's quality concern"},
+      {"handle": "mitchellh", "name": "Mitchell Hashimoto", "why": "Deep builder, ships in public; strong founder + craft overlap"}
+    ],
+    "dev_tools_and_eng": [
+      {"handle": "kentcdodds", "name": "Kent C. Dodds", "why": "Testing thought leader; direct overlap with Brian's QA + test-quality takes"},
+      {"handle": "rauchg", "name": "Guillermo Rauch", "why": "Vercel founder; ships fast, talks about velocity vs quality tradeoffs"},
+      {"handle": "dhh", "name": "DHH", "why": "Opinionated on craft and shipping; Brian can engage with a measured QA counter-take"},
+      {"handle": "GergelyOrosz", "name": "Gergely Orosz", "why": "Eng leadership + industry patterns; great for Brian's founder/eng-leader replies"},
+      {"handle": "housecor", "name": "Cory House", "why": "Practical engineering + AI-assisted dev takes; good reply surface"}
+    ],
+    "qa_and_testing": [
+      {"handle": "jbrains", "name": "J. B. Rainsberger", "why": "Testing + design depth; Brian's natural peer territory"},
+      {"handle": "angiejones", "name": "Angie Jones", "why": "Automation testing leader; high-credibility QA voice to engage authentically"},
+      {"handle": "noahsussman", "name": "Noah Sussman", "why": "Testing-as-a-discipline thinker; aligns with 'tests that actually test something'"}
+    ],
+    "founders_building_in_public": [
+      {"handle": "levelsio", "name": "Pieter Levels", "why": "Indie building in public icon; Brian's solo/small-team automation resonates here"},
+      {"handle": "arvidkahl", "name": "Arvid Kahl", "why": "Bootstrapped founder audience; overlaps with services-business reality posts"},
+      {"handle": "thisiskp_", "name": "KP", "why": "Build-in-public community connector; good for founder-journey engagement"},
+      {"handle": "marc_louvion", "name": "Marc Lou", "why": "Ships relentlessly in public; engagement-friendly builder crowd"}
+    ],
+    "ai_eng_leaders": [
+      {"handle": "emollick", "name": "Ethan Mollick", "why": "Pragmatic AI-in-practice research; perfect for Brian's 'AI in real workflows' replies"},
+      {"handle": "alexalbert__", "name": "Alex Albert", "why": "Anthropic/Claude ecosystem; Brian builds on Claude Code, natural fit"},
+      {"handle": "OfficialLoganK", "name": "Logan Kilpatrick", "why": "AI dev platform voice; good for AI-tooling reply threads"}
+    ]
+  }
+}
