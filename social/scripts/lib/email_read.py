@@ -81,17 +81,23 @@ def fetch_unseen_replies(owner: str) -> list[dict]:
     return out
 
 
-def parse_reply(body: str) -> tuple[set, dict]:
-    """Parse an approval reply. Returns (approved_ids, edits {id: new_text}).
+def parse_reply(body: str) -> tuple[set, dict, bool]:
+    """Parse an approval reply. Returns (approved_ids, edits {id: new_text}, approve_all).
 
     Recognized, case-insensitive, line by line:
+      approve all          -> approve every post in the batch (approve_all=True)
+      approve all 3        -> ALSO approve_all; the word "all" wins over the digit
       approve 1, 3, 7      -> approve those ids
       1, 3, 7              -> a numbers-only line also approves
       edit 2: new text     -> replace post 2's text and approve it
-    Anything else is ignored, so a reply with no numbers posts nothing.
+    Anything else is ignored, so a reply with no numbers/all posts nothing.
+
+    The caller expands approve_all to the batch's real ids — parse_reply has no
+    knowledge of how many posts the batch contains.
     """
     approved: set = set()
     edits: dict = {}
+    approve_all = False
     for line in body.splitlines():
         line = line.strip()
         if not line:
@@ -104,11 +110,17 @@ def parse_reply(body: str) -> tuple[set, dict]:
             continue
         m = re.match(r"approve\b(.*)", line, re.I)
         if m:
-            approved.update(int(n) for n in re.findall(r"\d+", m.group(1)))
+            rest = m.group(1)
+            if re.search(r"\ball\b", rest, re.I):  # "approve all" / "approve all 3"
+                approve_all = True
+            approved.update(int(n) for n in re.findall(r"\d+", rest))
+            continue
+        if re.fullmatch(r"\s*all\s*", line, re.I):  # a bare "all" line
+            approve_all = True
             continue
         if re.fullmatch(r"[\d,\s]+", line):  # a bare list of numbers
             approved.update(int(n) for n in re.findall(r"\d+", line))
-    return approved, edits
+    return approved, edits, approve_all
 
 
 def date_from_subject(subject: str) -> str | None:

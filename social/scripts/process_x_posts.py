@@ -47,7 +47,9 @@ def process_reply(reply: dict, dry_run: bool) -> dict:
         return {"skipped": f"no batch file for {date}"}
 
     batch = json.load(open(path, encoding="utf-8"))
-    approved, edits = email_read.parse_reply(reply["body"])
+    approved, edits, approve_all = email_read.parse_reply(reply["body"])
+    if approve_all:
+        approved = {p["id"] for p in batch["posts"]}
     by_id = {p["id"]: p for p in batch["posts"]}
 
     posted, skipped, errors = [], [], []

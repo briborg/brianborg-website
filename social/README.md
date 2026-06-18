@@ -69,6 +69,7 @@ soft tenure numbers) and aborts before sending if any post regresses.
 
 1. A draft email lands in your inbox with numbered posts.
 2. **Reply to that email** to signal approval:
+   - `approve all` (or `approve all 3`) posts the entire batch.
    - `approve 1, 3, 7` posts those three to X.
    - `edit 2: your new text` posts an edited version of post 2.
    - a bare line of numbers (`1 3 7`) also approves.
