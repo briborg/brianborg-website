@@ -43,7 +43,7 @@ def strip_quote(body: str) -> str:
     return (body[: m.start()] if m else body).strip()
 
 
-def fetch_unseen_replies(owner: str) -> list[dict]:
+def fetch_unseen_replies(owner: str, mark_seen: bool = True) -> list[dict]:
     """Return unseen INBOX replies to a draft email, FROM the owner only.
     Marks each returned message \\Seen so it isn't processed twice.
     Each dict: {uid, subject, body (quote-stripped)}.
@@ -60,7 +60,8 @@ def fetch_unseen_replies(owner: str) -> list[dict]:
         if typ != "OK":
             return out
         for uid in data[0].split():
-            typ, msgdata = M.fetch(uid, "(RFC822)")
+            # BODY.PEEK doesn't set \Seen, so a dry-run can read without consuming.
+            typ, msgdata = M.fetch(uid, "(RFC822)" if mark_seen else "(BODY.PEEK[])")
             if typ != "OK":
                 continue
             msg = email.message_from_bytes(msgdata[0][1])
@@ -72,7 +73,8 @@ def fetch_unseen_replies(owner: str) -> list[dict]:
                 "subject": _decode(msg.get("Subject", "")),
                 "body": strip_quote(_plain_body(msg)),
             })
-            M.store(uid, "+FLAGS", "\\Seen")
+            if mark_seen:
+                M.store(uid, "+FLAGS", "\\Seen")
     finally:
         try:
             M.logout()

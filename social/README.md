@@ -13,7 +13,7 @@ scripts run on GitHub Actions (this repo) and locally.
 |--------|------------------|-----------|
 | `scripts/generate_x_posts.py` | A batch of X posts in Brian's voice across 3 lanes | Email for review |
 | `scripts/build_engage_list.py` | A daily list of tech accounts to follow + reply angles | Email |
-| `scripts/process_x_posts.py` | Reads approval replies, posts approved drafts to X | Confirmation email |
+| `scripts/run_daily.py` | Reads approvals into the queue, posts ONE approved post/day | Confirmation email |
 
 The three content lanes: **founder / builder journey**, **building in public with AI**,
 **AI + code quality**.
@@ -57,9 +57,9 @@ soft tenure numbers) and aborts before sending if any post regresses.
 ./.venv/bin/python scripts/generate_x_posts.py --count 7 --email
 ./.venv/bin/python scripts/build_engage_list.py --email
 
-# read approval replies and post approved drafts to X:
-./.venv/bin/python scripts/process_x_posts.py            # live
-./.venv/bin/python scripts/process_x_posts.py --dry-run  # parse only, post nothing
+# daily drip: read approvals into the queue + post one approved post:
+./.venv/bin/python scripts/run_daily.py            # live
+./.venv/bin/python scripts/run_daily.py --dry-run  # read + plan only, post nothing
 
 # confirm WHICH X account the tokens post as (run before relying on auto-post):
 ./.venv/bin/python scripts/whoami_x.py
@@ -74,25 +74,29 @@ soft tenure numbers) and aborts before sending if any post regresses.
    - `edit 2: your new text` posts an edited version of post 2.
    - a bare line of numbers (`1 3 7`) also approves.
    - reply with no numbers (or "looks good") and nothing posts.
-3. `process_x_posts.py` runs on a schedule, reads your reply over IMAP, posts the
-   approved drafts to X via the API, and emails a confirmation with the links.
+3. Approved posts go into a queue and publish **one per day** (~11am Mountain) so they
+   trickle out like a person posting through the week, not in a bot-like burst. `run_daily.py`
+   reads your reply over IMAP, marks the matching posts approved, publishes the oldest one,
+   and emails a confirmation with the link.
 
-It only acts on replies from your own address, never posts a draft twice (tracked by
-`posted_id` in the batch JSON), and rejects an edited post over 280 chars. The same Gmail
-app password powers both sending and reading replies, so no extra OAuth is needed. Posting
-uses the X API (free tier allows posting); it never follows or likes anything.
+It only acts on replies from your own address, never posts twice (state tracked in
+`queue.json`), enforces one post per day, and rejects an edited post over 280 chars. The same
+Gmail app password powers both sending and reading replies. Posting uses the X API
+(pay-per-use, ~1.5¢ per text post); it never follows or likes anything.
 
 ## Scheduling
 
 GitHub Actions workflows (in this repo's `.github/workflows/`):
-- `x-generate.yml` — Monday morning, generates the week's post batch
-- `x-engage.yml` — daily, sends the engage-list
-- `x-process.yml` — twice daily, posts approved drafts
+- `x-generate.yml` — Monday morning: generates the week's batch, emails it, enqueues drafts
+- `x-engage.yml` — daily: sends the engage-list
+- `x-daily.yml` — daily (~11am MT): reads approvals, posts ONE approved post, commits the queue
 
-These need repo secrets set on `briborg/brianborg-website`: `ANTHROPIC_API_KEY`,
-`GMAIL_USER`, `GMAIL_APP_PASSWORD`, `REVIEW_EMAIL_TO`, and `X_API_KEY` / `X_API_SECRET` /
-`X_ACCESS_TOKEN` / `X_ACCESS_TOKEN_SECRET` for the process job. Jobs degrade quietly (exit
-green with a warning) until the Gmail secret is set, so they don't spam failures before setup.
+`queue.json` is the durable state (draft → approved → posted). The generate and daily jobs
+commit it back to the repo (with `[skip ci]` so Netlify doesn't rebuild) and share a
+`concurrency` group so they never clobber each other. All jobs need repo secrets on
+`briborg/brianborg-website`: `ANTHROPIC_API_KEY`, `GMAIL_USER`, `GMAIL_APP_PASSWORD`,
+`REVIEW_EMAIL_TO`, and the four `X_*` for posting. Jobs degrade quietly (exit green with a
+warning) until the Gmail secret is set.
 
 ## Files
 
@@ -102,12 +106,13 @@ social/
     brian-voice.md      # how Brian writes (weight 3.0)
     brian-themes.md     # source material / facts (weight 2.0)
   seed_accounts.json    # curated accounts for the engage-list (grow this)
+  queue.json            # durable post queue (draft -> approved -> posted); committed
   scripts/
-    generate_x_posts.py     # draft posts -> email
+    generate_x_posts.py     # draft posts -> email + enqueue
     build_engage_list.py    # daily engage targets -> email
-    process_x_posts.py      # read approvals -> post to X
+    run_daily.py            # read approvals -> post ONE/day from the queue
     whoami_x.py             # which account do the X_* tokens post as?
-    lib/{context,email_send,email_read,x_client}.py
+    lib/{context,email_send,email_read,x_client,queue_store}.py
   drafts/               # dated draft .txt + batch .json (gitignored)
   requirements.txt
   .env.example

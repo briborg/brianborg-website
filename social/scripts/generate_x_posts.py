@@ -220,6 +220,11 @@ def main():
                 text_body=render_text(posts, date),
             )
             print(f"  Emailed drafts to {to}", file=sys.stderr)
+            from lib import queue_store
+            q = queue_store.load()
+            n = queue_store.add_drafts(q, date, posts, now.isoformat(timespec="seconds"))
+            queue_store.save(q)
+            print(f"  Queued {n} drafts for the daily drip (awaiting approval)", file=sys.stderr)
         except email_send.EmailNotConfigured as e:
             print(f"  SKIPPED email (not configured yet): {e}", file=sys.stderr)
     else:

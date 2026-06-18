@@ -1,16 +1,16 @@
-name: X — Generate Posts
+name: X — Daily Drip
 
 on:
   schedule:
-    # Monday 2:03pm UTC = 8:03am MT — a week's batch of X posts, emailed for review
-    - cron: '3 14 * * 1'
+    # 17:00 UTC ≈ 11am Mountain — reads approvals and posts ONE approved item/day
+    - cron: '0 17 * * *'
   workflow_dispatch:
     inputs:
-      count:
-        description: 'How many posts to generate'
-        default: '7'
+      dry_run:
+        description: 'Read + plan only, post nothing (true/false)'
+        default: 'false'
 
-# Serialize with x-daily so both can safely commit queue.json
+# Serialize with x-generate so both can safely commit queue.json
 concurrency:
   group: x-queue
   cancel-in-progress: false
@@ -19,7 +19,7 @@ permissions:
   contents: write
 
 jobs:
-  generate:
+  drip:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -31,21 +31,26 @@ jobs:
       - name: Install dependencies
         run: pip install -r social/requirements.txt
 
-      - name: Generate X posts, email for review, enqueue drafts
-        run: python social/scripts/generate_x_posts.py --count "${{ github.event.inputs.count || '7' }}" --email
+      - name: Read approvals and post one
+        run: python social/scripts/run_daily.py ${{ github.event.inputs.dry_run == 'true' && '--dry-run' || '' }}
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           GMAIL_USER: ${{ secrets.GMAIL_USER }}
           GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
           REVIEW_EMAIL_TO: ${{ secrets.REVIEW_EMAIL_TO }}
+          X_API_KEY: ${{ secrets.X_API_KEY }}
+          X_API_SECRET: ${{ secrets.X_API_SECRET }}
+          X_ACCESS_TOKEN: ${{ secrets.X_ACCESS_TOKEN }}
+          X_ACCESS_TOKEN_SECRET: ${{ secrets.X_ACCESS_TOKEN_SECRET }}
 
-      - name: Commit queued drafts
+      - name: Commit queue state
+        if: github.event.inputs.dry_run != 'true'
         run: |
           git config user.name "brianborg-x-bot"
           git config user.email "bot@brianborg.com"
           git add social/queue.json
           if ! git diff --cached --quiet; then
-            git commit -m "chore(social): enqueue weekly drafts [skip ci]"
+            git commit -m "chore(social): update post queue [skip ci]"
             git pull --rebase origin main
             git push origin main
           fi

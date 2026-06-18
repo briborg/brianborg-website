@@ -1,0 +1,4 @@
+{
+  "_comment": "Durable post queue for the once-per-day drip. generate_x_posts.py appends drafts here; run_daily.py flips approved items live one per day. Committed to the repo (with [skip ci]) so state survives between GitHub Actions runs. Today's first 3 posts were published manually before this queue existed, so they are intentionally not listed.",
+  "items": []
+}
