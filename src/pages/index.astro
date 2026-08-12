@@ -1,183 +1,580 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import siteData from '../content/site.json';
-
-const { hero, about, services, testimonials, career, recognition, connect } = siteData;
-
-function renderMarkdown(text: string): string {
-  return text
-    .replace(/\*\*(.+?)\*\*/g, '<strong class="text-stone-100">$1</strong>')
-    .replace(/\*(.+?)\*/g, '<em>$1</em>');
-}
 ---
 
-<Layout title="Brian Borg — Builder, Founder, Quality Obsessive">
-  <!-- Nav -->
-  <nav class="fixed top-0 left-0 right-0 z-50 bg-[#1a1714]/90 backdrop-blur-md border-b border-stone-800/40">
-    <div class="max-w-6xl mx-auto px-6 flex items-center justify-between h-16">
-      <a href="/" class="font-serif text-xl font-bold text-stone-100 tracking-tight">Brian Borg</a>
-      <div class="hidden md:flex items-center gap-8 text-sm tracking-wide uppercase text-stone-400">
-        <a href="#about" class="hover:text-amber-400 transition-colors">About</a>
-        <a href="#work" class="hover:text-amber-400 transition-colors">Services</a>
-        <a href="#testimonials" class="hover:text-amber-400 transition-colors">Clients</a>
-        <a href="#journey" class="hover:text-amber-400 transition-colors">Journey</a>
-        <a href="#connect" class="hover:text-amber-400 transition-colors">Contact</a>
-      </div>
-    </div>
-  </nav>
+<Layout title="Brian Borg — Founder & CEO, OnPath Testing">
+<div class="relative bg-slate-900 leading-relaxed text-slate-400 antialiased selection:bg-teal-300 selection:text-teal-900 min-h-screen">
+  <div id="spotlight" class="pointer-events-none fixed inset-0 z-30 transition duration-300" style="background: radial-gradient(600px circle at 0px 0px, rgba(29, 78, 216, 0.15), transparent 80%)"></div>
+<div class="mx-auto min-h-screen max-w-screen-xl px-6 py-12 font-sans md:px-12 md:py-16 lg:py-0">
+  <div class="lg:flex lg:justify-between lg:gap-4">
 
-  <!-- Hero — full-bleed image with text overlay -->
-  <header class="relative min-h-[45vh] flex items-end">
-    <img
-      src="/photos/hero.jpg"
-      alt="Brian Borg"
-      class="absolute inset-0 w-full h-full object-cover object-[center_40%]"
-    />
-    <div class="absolute inset-0 bg-gradient-to-t from-[#1a1714] via-[#1a1714]/60 to-transparent"></div>
-    <div class="relative max-w-6xl mx-auto px-6 pb-20 w-full">
-      <h1 class="font-serif text-6xl md:text-8xl font-bold leading-none tracking-tight mb-6">
-        Passions &<br />Personality.
-      </h1>
-      <p class="text-xl md:text-2xl text-stone-300 max-w-2xl leading-relaxed" set:html={renderMarkdown(hero.subtitle)} />
-    </div>
-  </header>
-
-  <!-- Intro — two-column: photo left, text right -->
-  <section class="py-24">
-    <div class="max-w-6xl mx-auto px-6">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center">
-        <img
-          src="/photos/himalayas.jpg"
-          alt="Brian Borg in the Indian Himalayas"
-          class="w-full rounded-lg shadow-lg shadow-amber-900/10"
-        />
-        <div>
-          <p class="section-label mb-4">A few things about me</p>
-          <h2 class="font-serif text-3xl md:text-4xl font-bold mb-6 text-stone-50">{about.heading}</h2>
-          <p class="text-lg text-stone-300 leading-relaxed" set:html={renderMarkdown(hero.tagline)} />
+    <!-- LEFT STICKY SIDEBAR -->
+    <header class="lg:sticky lg:top-0 lg:flex lg:max-h-screen lg:w-[48%] lg:flex-col lg:justify-between lg:py-24">
+      <div>
+        <div class="flex items-center gap-4">
+          <img src="/headshot.jpg" alt="Brian Borg" class="h-14 w-14 shrink-0 rounded-full object-cover ring-1 ring-slate-600/60" />
+          <h1 class="text-4xl font-bold tracking-tight text-slate-200 sm:text-5xl">
+            <a href="/">Brian Borg</a>
+          </h1>
         </div>
+        <h2 class="mt-3 text-lg font-medium tracking-tight text-slate-200 sm:text-xl">Founder &amp; CEO, OnPath Testing</h2>
+        <p class="mt-4 max-w-xs leading-normal">Builder. Founder. Quality obsessed. I've spent 30+ years at the intersection of software, people, and process, asking the questions that matter: does it do what we intended? And did we get there with the greatest efficiency possible?</p>
+
+        <nav class="nav hidden lg:block" aria-label="In-page jump links">
+          <ul class="mt-16 w-max">
+            <li>
+              <a class="group flex items-center py-3 active" href="#about">
+                <span class="nav-indicator mr-4 h-px w-8 bg-slate-600 transition-all group-hover:w-16 group-hover:bg-slate-200"></span>
+                <span class="nav-text text-xs font-bold uppercase tracking-widest text-slate-500 group-hover:text-slate-200">About</span>
+              </a>
+            </li>
+            <li>
+              <a class="group flex items-center py-3" href="#experience">
+                <span class="nav-indicator mr-4 h-px w-8 bg-slate-600 transition-all group-hover:w-16 group-hover:bg-slate-200"></span>
+                <span class="nav-text text-xs font-bold uppercase tracking-widest text-slate-500 group-hover:text-slate-200">Experience</span>
+              </a>
+            </li>
+            <li>
+              <a class="group flex items-center py-3" href="#projects">
+                <span class="nav-indicator mr-4 h-px w-8 bg-slate-600 transition-all group-hover:w-16 group-hover:bg-slate-200"></span>
+                <span class="nav-text text-xs font-bold uppercase tracking-widest text-slate-500 group-hover:text-slate-200">Projects</span>
+              </a>
+            </li>
+            <li>
+              <a class="group flex items-center py-3" href="#recognition">
+                <span class="nav-indicator mr-4 h-px w-8 bg-slate-600 transition-all group-hover:w-16 group-hover:bg-slate-200"></span>
+                <span class="nav-text text-xs font-bold uppercase tracking-widest text-slate-500 group-hover:text-slate-200">Recognition</span>
+              </a>
+            </li>
+            <li>
+              <a class="group flex items-center py-3" href="#testimonials">
+                <span class="nav-indicator mr-4 h-px w-8 bg-slate-600 transition-all group-hover:w-16 group-hover:bg-slate-200"></span>
+                <span class="nav-text text-xs font-bold uppercase tracking-widest text-slate-500 group-hover:text-slate-200">Testimonials</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+
+        <a href="/brian-borg-cv.pdf" target="_blank" rel="noreferrer"
+          class="mt-8 inline-flex items-center gap-2 rounded border border-slate-600 px-4 py-2 text-xs font-bold uppercase tracking-widest text-slate-400 transition-colors hover:border-teal-300 hover:text-teal-300">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-4 w-4"><path fill-rule="evenodd" d="M10 3a.75.75 0 01.75.75v6.638l1.96-2.158a.75.75 0 111.11 1.01l-3.25 3.5a.75.75 0 01-1.11 0l-3.25-3.5a.75.75 0 111.11-1.01l1.96 2.158V3.75A.75.75 0 0110 3zM3.5 12.75a.75.75 0 01.75.75v2.5c0 .138.112.25.25.25h11c.138 0 .25-.112.25-.25v-2.5a.75.75 0 011.5 0v2.5A1.75 1.75 0 0115.5 17.5h-11A1.75 1.75 0 012.75 15.75v-2.5a.75.75 0 01.75-.75z" clip-rule="evenodd"></path></svg>
+          Full CV (PDF)
+        </a>
       </div>
-    </div>
-  </section>
 
-  <!-- About -->
-  <section id="about" class="py-24 border-t border-stone-800/60">
-    <div class="max-w-3xl mx-auto px-6">
-      <p class="section-label mb-4">This is me in a nutshell</p>
-      <div class="space-y-6 text-lg text-stone-300 leading-relaxed">
-        {about.paragraphs.map((p: string) => (
-          <p set:html={renderMarkdown(p)} />
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- What I Do -->
-  <section id="work" class="py-24 border-t border-stone-800/60">
-    <div class="max-w-3xl mx-auto px-6">
-      <p class="section-label mb-4">Services</p>
-      <h2 class="font-serif text-4xl font-bold mb-12 text-stone-50">What I do</h2>
-      <div class="space-y-12">
-        {services.map((svc: { title: string; description: string }) => (
-          <div>
-            <h3 class="text-xl font-semibold text-amber-400 mb-3">{svc.title}</h3>
-            <p class="text-lg text-stone-300 leading-relaxed">{svc.description}</p>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- Photo Break -->
-  <section class="py-12">
-    <div class="max-w-6xl mx-auto px-6">
-      <img
-        src="/photos/rock.jpg"
-        alt="Brian Borg"
-        class="w-full rounded-lg shadow-lg shadow-amber-900/10"
-      />
-    </div>
-  </section>
-
-  <!-- Testimonials -->
-  <section id="testimonials" class="py-24 border-t border-stone-800/60">
-    <div class="max-w-3xl mx-auto px-6">
-      <p class="section-label mb-4">Testimonials</p>
-      <h2 class="font-serif text-4xl font-bold mb-12 text-stone-50">What clients say</h2>
-      <div class="space-y-14">
-        {testimonials.map((t: { quote: string; author: string; role: string }) => (
-          <blockquote class="border-l-2 border-amber-400/40 pl-8">
-            <p class="font-serif text-xl md:text-2xl text-stone-200 italic leading-relaxed mb-4">
-              &ldquo;{t.quote}&rdquo;
-            </p>
-            <cite class="text-stone-500 not-italic text-sm tracking-wide uppercase">&mdash; {t.author}, {t.role}</cite>
-          </blockquote>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- Career Timeline -->
-  <section id="journey" class="py-24 border-t border-stone-800/60">
-    <div class="max-w-3xl mx-auto px-6">
-      <p class="section-label mb-4">Timeline</p>
-      <h2 class="font-serif text-4xl font-bold mb-12 text-stone-50">The journey</h2>
-      <div class="space-y-8">
-        {career.map((c: { period: string; title: string; description: string }) => (
-          <div class="flex gap-6">
-            <div class="text-amber-400/80 font-mono text-sm pt-1 w-24 shrink-0">{c.period}</div>
-            <div>
-              <h3 class="font-semibold text-stone-100 mb-1">{c.title}</h3>
-              <p class="text-stone-400 leading-relaxed">{c.description}</p>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- Recognition -->
-  <section id="recognition" class="py-24 border-t border-stone-800/60">
-    <div class="max-w-3xl mx-auto px-6">
-      <p class="section-label mb-4">Recognition</p>
-      <h2 class="font-serif text-4xl font-bold mb-10 text-stone-50">Recognition</h2>
-      <ul class="space-y-4 text-lg text-stone-300">
-        {recognition.map((item: string) => (
-          <li class="flex items-start gap-3">
-            <span class="text-amber-400/60 mt-1.5 text-xs">&#9670;</span>
-            <span>{item}</span>
-          </li>
-        ))}
+      <ul class="ml-1 mt-8 flex items-center" aria-label="Social media">
+        <li class="mr-5 shrink-0 text-xs">
+          <a class="block hover:text-slate-200" href="https://www.linkedin.com/in/brianborg/" target="_blank" rel="noreferrer noopener" aria-label="LinkedIn" title="LinkedIn">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-6 w-6"><path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19a.66.66 0 000 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"></path></svg>
+          </a>
+        </li>
+        <li class="mr-5 shrink-0 text-xs">
+          <a class="block hover:text-slate-200" href="https://x.com/briborg" target="_blank" rel="noreferrer noopener" aria-label="X / Twitter" title="X / Twitter">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-6 w-6"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg>
+          </a>
+        </li>
+        <li class="mr-5 shrink-0 text-xs">
+          <a class="block hover:text-slate-200" href="https://www.instagram.com/onpathtestingqa/" target="_blank" rel="noreferrer noopener" aria-label="Instagram" title="Instagram">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-6 w-6"><path d="M12 2c2.717 0 3.056.01 4.122.06 1.065.05 1.79.217 2.428.465.66.256 1.216.6 1.772 1.153.5.5.887 1.11 1.153 1.772.247.637.415 1.363.465 2.428.047 1.066.06 1.405.06 4.122 0 2.717-.01 3.056-.06 4.122-.05 1.065-.218 1.79-.465 2.428a4.883 4.883 0 01-1.153 1.772 4.915 4.915 0 01-1.772 1.153c-.637.247-1.363.415-2.428.465-1.066.047-1.405.06-4.122.06-2.717 0-3.056-.01-4.122-.06-1.065-.05-1.79-.218-2.428-.465a4.89 4.89 0 01-1.772-1.153 4.904 4.904 0 01-1.153-1.772c-.248-.637-.415-1.363-.465-2.428C2.013 15.056 2 14.717 2 12c0-2.717.01-3.056.06-4.122.05-1.066.217-1.79.465-2.428a4.88 4.88 0 011.153-1.772A4.897 4.897 0 015.45 2.525c.638-.248 1.362-.415 2.428-.465C8.944 2.013 9.283 2 12 2zm0 1.802c-2.67 0-2.987.01-4.04.059-.976.045-1.505.207-1.858.344-.466.181-.8.398-1.15.748-.35.35-.566.684-.747 1.15-.137.353-.3.882-.344 1.857-.05 1.054-.06 1.37-.06 4.04 0 2.67.01 2.987.06 4.04.045.976.207 1.505.344 1.858.181.466.398.8.748 1.15.35.35.684.566 1.15.747.353.137.882.3 1.857.344 1.054.05 1.37.06 4.04.06 2.67 0 2.987-.01 4.04-.06.976-.045 1.505-.207 1.858-.344a3.09 3.09 0 001.15-.748c.35-.35.566-.683.747-1.15.137-.352.3-.881.344-1.857.05-1.053.06-1.37.06-4.04 0-2.67-.01-2.986-.06-4.04-.045-.975-.207-1.504-.344-1.857a3.098 3.098 0 00-.748-1.15 3.09 3.09 0 00-1.15-.747c-.352-.137-.881-.3-1.857-.344-1.053-.05-1.37-.06-4.04-.06zm0 4.595a5.603 5.603 0 110 11.206 5.603 5.603 0 010-11.206zm0 1.802a3.8 3.8 0 100 7.601 3.8 3.8 0 000-7.601zm5.727-1.802a1.31 1.31 0 11-2.62 0 1.31 1.31 0 012.62 0z"></path></svg>
+          </a>
+        </li>
+        <li class="mr-5 shrink-0 text-xs">
+          <a class="block hover:text-slate-200" href="https://www.onpathtesting.com" target="_blank" rel="noreferrer noopener" aria-label="OnPath Testing" title="OnPath Testing">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="h-6 w-6"><path d="M12 21a9 9 0 100-18 9 9 0 000 18z"></path><path d="M3.6 9h16.8M3.6 15h16.8M11.5 3a17 17 0 000 18M12.5 3a17 17 0 010 18"></path></svg>
+          </a>
+        </li>
       </ul>
-    </div>
-  </section>
+    </header>
 
-  <!-- Connect -->
-  <section id="connect" class="py-24 border-t border-stone-800/60">
-    <div class="max-w-3xl mx-auto px-6">
-      <p class="section-label mb-4">Get in touch</p>
-      <h2 class="font-serif text-4xl font-bold mb-8 text-stone-50">{connect.heading}</h2>
-      <p class="text-lg text-stone-300 mb-10 leading-relaxed">{connect.text}</p>
-      <a href={`mailto:${connect.email}`} class="inline-block bg-amber-500 hover:bg-amber-400 text-stone-950 font-semibold px-7 py-3.5 rounded-lg transition-colors mb-10 shadow-lg shadow-amber-900/20">
-        {connect.email}
-      </a>
-      <div class="flex flex-wrap gap-6 text-lg">
-        {connect.links.map((link: { label: string; url: string }) => (
-          <a href={link.url} target="_blank" rel="noopener" class="text-amber-400 hover:text-amber-300 transition-colors">{link.label}</a>
-        ))}
-      </div>
-    </div>
-  </section>
+    <!-- RIGHT SCROLLING CONTENT -->
+    <main id="content" class="pt-24 lg:w-[52%] lg:py-24">
 
-  <!-- Footer -->
-  <footer class="py-12 border-t border-stone-800/60">
-    <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center text-stone-600 text-sm">
-      <span>&copy; {new Date().getFullYear()} Brian Borg. Boulder, CO.</span>
-      <div class="flex gap-6 mt-4 md:mt-0">
-        {connect.links.map((link: { label: string; url: string }) => (
-          <a href={link.url} target="_blank" rel="noopener" class="hover:text-stone-400 transition-colors">{link.label}</a>
-        ))}
-      </div>
-    </div>
-  </footer>
+      <section id="about" class="mb-16 scroll-mt-16 md:mb-24 lg:mb-36" aria-label="About me">
+        <div>
+          <p class="mb-4">
+            I started my career writing code — and immediately discovered I had a talent for
+            breaking it. That detour into QA turned into a calling. I loved the puzzle and the
+            practice of it: understanding systems deeply enough to find where they'd fail before
+            users did. Working with the design, the tech, and the process of software development.
+            And appreciating the people side of software as much as the bytes.
+          </p>
+          <p class="mb-4">
+            In 2009, I founded <a class="font-medium text-slate-200" href="https://www.onpathtesting.com" target="_blank" rel="noreferrer">OnPath Testing</a>
+            with a simple idea: small and mid-sized companies deserve the same quality engineering
+            that enterprises get, without the enterprise price tag or bureaucracy. I wanted to
+            bring a down-to-earth philosophy of meeting my clients where they are at, integrating
+            with their team in their process, all while making their software better. Today we're
+            a team of 20+ engineers helping companies from scrappy startups to established brands
+            ship software they're confident in.
+          </p>
+          <p class="mb-4">
+            But I'm not just a QA guy. I'm a builder at heart — whether it's a business, a tool, a
+            team, or a process. I get energized by taking something messy and making it work. I
+            care about craft, about doing things right, and about the people on the other end of
+            the software we ship.
+          </p>
+          <p class="mb-4">
+            Right now I'm deep in the intersection of AI and quality engineering. Teams are
+            shipping AI-generated code faster than ever, and the question everyone's asking is:
+            does it actually work? How can we do this better? That's the problem I've spent my
+            whole career solving — and it's never been more relevant.
+          </p>
+          <p class="mb-4">
+            OnPath now provides both dev and QA, all with the heart of a quality engineer and
+            captured in our mantra:
+          </p>
+          <p class="mt-6 font-serif text-2xl italic tracking-wide text-white text-center">
+            AI Built, OnPath Approved.
+          </p>
+        </div>
+      </section>
+
+      <section id="experience" class="mb-16 scroll-mt-16 md:mb-24 lg:mb-36" aria-label="Work experience">
+        <div>
+          <ol class="group/list">
+
+            <li class="mb-12">
+              <div class="group relative grid pb-1 transition-all sm:grid-cols-8 sm:gap-8 md:gap-4 lg:hover:!opacity-100 lg:group-hover/list:opacity-50">
+                <div class="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-md transition lg:-inset-x-6 lg:block lg:group-hover:bg-slate-800/50 lg:group-hover:shadow-[inset_0_1px_0_0_rgba(148,163,184,0.1)] lg:group-hover:drop-shadow-lg"></div>
+                <header class="z-10 mb-2 mt-1 text-xs font-semibold uppercase tracking-wide text-slate-500 sm:col-span-2">2009 — Now</header>
+                <div class="z-10 sm:col-span-6">
+                  <h3 class="font-medium leading-snug text-slate-200">
+                    <a class="inline-flex items-baseline font-medium leading-tight text-slate-200 group/link text-base" href="https://www.onpathtesting.com" target="_blank" rel="noreferrer">
+                      <span>Founder &amp; CEO · <span class="inline-block">OnPath Testing
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="inline-block h-4 w-4 shrink-0 transition-transform group-hover/link:-translate-y-1 group-hover/link:translate-x-1 ml-1 translate-y-px"><path fill-rule="evenodd" d="M5.22 14.78a.75.75 0 001.06 0l7.22-7.22v5.69a.75.75 0 001.5 0v-7.5a.75.75 0 00-.75-.75h-7.5a.75.75 0 000 1.5h5.69l-7.22 7.22a.75.75 0 000 1.06z" clip-rule="evenodd"></path></svg>
+                      </span></span>
+                    </a>
+                  </h3>
+                  <p class="mt-2 text-sm leading-normal">
+                    Built a QA consultancy from zero to 30+ engineers across 8+ countries.
+                  </p>
+                </div>
+              </div>
+            </li>
+
+            <li class="mb-12">
+              <div class="group relative grid pb-1 transition-all sm:grid-cols-8 sm:gap-8 md:gap-4 lg:hover:!opacity-100 lg:group-hover/list:opacity-50">
+                <div class="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-md transition lg:-inset-x-6 lg:block lg:group-hover:bg-slate-800/50 lg:group-hover:shadow-[inset_0_1px_0_0_rgba(148,163,184,0.1)] lg:group-hover:drop-shadow-lg"></div>
+                <header class="z-10 mb-2 mt-1 text-xs font-semibold uppercase tracking-wide text-slate-500 sm:col-span-2">2009</header>
+                <div class="z-10 sm:col-span-6">
+                  <h3 class="font-medium leading-snug text-slate-200">
+                    <span>Technical QA Engineer · Wyoming Department of Health</span>
+                  </h3>
+                  <p class="mt-2 text-sm leading-normal">
+                    Provided QA expertise and built a C#/WatiN test automation framework for the
+                    state's WCIS healthcare tracking system.
+                  </p>
+                </div>
+              </div>
+            </li>
+
+            <li class="mb-12">
+              <div class="group relative grid pb-1 transition-all sm:grid-cols-8 sm:gap-8 md:gap-4 lg:hover:!opacity-100 lg:group-hover/list:opacity-50">
+                <div class="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-md transition lg:-inset-x-6 lg:block lg:group-hover:bg-slate-800/50 lg:group-hover:shadow-[inset_0_1px_0_0_rgba(148,163,184,0.1)] lg:group-hover:drop-shadow-lg"></div>
+                <header class="z-10 mb-2 mt-1 text-xs font-semibold uppercase tracking-wide text-slate-500 sm:col-span-2">2007 — 2008</header>
+                <div class="z-10 sm:col-span-6">
+                  <h3 class="font-medium leading-snug text-slate-200">
+                    <span>Senior QA Engineer · MapQuest</span>
+                  </h3>
+                  <p class="mt-2 text-sm leading-normal">
+                    Led test management for MapQuest's Gas Prices portal and core dotcom site.
+                  </p>
+                </div>
+              </div>
+            </li>
+
+            <li class="mb-12">
+              <div class="group relative grid pb-1 transition-all sm:grid-cols-8 sm:gap-8 md:gap-4 lg:hover:!opacity-100 lg:group-hover/list:opacity-50">
+                <div class="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-md transition lg:-inset-x-6 lg:block lg:group-hover:bg-slate-800/50 lg:group-hover:shadow-[inset_0_1px_0_0_rgba(148,163,184,0.1)] lg:group-hover:drop-shadow-lg"></div>
+                <header class="z-10 mb-2 mt-1 text-xs font-semibold uppercase tracking-wide text-slate-500 sm:col-span-2">2007</header>
+                <div class="z-10 sm:col-span-6">
+                  <h3 class="font-medium leading-snug text-slate-200">
+                    <span>QA Manager &amp; IT Director · Equity Creations</span>
+                  </h3>
+                  <p class="mt-2 text-sm leading-normal">
+                    Dual role spanning quality and infrastructure at a real estate investment
+                    startup.
+                  </p>
+                </div>
+              </div>
+            </li>
+
+            <li class="mb-12">
+              <div class="group relative grid pb-1 transition-all sm:grid-cols-8 sm:gap-8 md:gap-4 lg:hover:!opacity-100 lg:group-hover/list:opacity-50">
+                <div class="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-md transition lg:-inset-x-6 lg:block lg:group-hover:bg-slate-800/50 lg:group-hover:shadow-[inset_0_1px_0_0_rgba(148,163,184,0.1)] lg:group-hover:drop-shadow-lg"></div>
+                <header class="z-10 mb-2 mt-1 text-xs font-semibold uppercase tracking-wide text-slate-500 sm:col-span-2">2006 — 2007</header>
+                <div class="z-10 sm:col-span-6">
+                  <h3 class="font-medium leading-snug text-slate-200">
+                    <span>Lead QA Engineer · BT (BT Conferencing)</span>
+                  </h3>
+                  <p class="mt-2 text-sm leading-normal">
+                    Led QA for video conferencing software across a 7-developer agile team.
+                  </p>
+                </div>
+              </div>
+            </li>
+
+            <li class="mb-12">
+              <div class="group relative grid pb-1 transition-all sm:grid-cols-8 sm:gap-8 md:gap-4 lg:hover:!opacity-100 lg:group-hover/list:opacity-50">
+                <div class="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-md transition lg:-inset-x-6 lg:block lg:group-hover:bg-slate-800/50 lg:group-hover:shadow-[inset_0_1px_0_0_rgba(148,163,184,0.1)] lg:group-hover:drop-shadow-lg"></div>
+                <header class="z-10 mb-2 mt-1 text-xs font-semibold uppercase tracking-wide text-slate-500 sm:col-span-2">2004 — 2006</header>
+                <div class="z-10 sm:col-span-6">
+                  <h3 class="font-medium leading-snug text-slate-200">
+                    <span>Lead QA Engineer · Red Door Interactive</span>
+                  </h3>
+                  <p class="mt-2 text-sm leading-normal">
+                    Led QA for a $2.5M mortgage application spanning CRM, e-commerce, and workflow
+                    automation.
+                  </p>
+                </div>
+              </div>
+            </li>
+
+            <li class="mb-12">
+              <div class="group relative grid pb-1 transition-all sm:grid-cols-8 sm:gap-8 md:gap-4 lg:hover:!opacity-100 lg:group-hover/list:opacity-50">
+                <div class="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-md transition lg:-inset-x-6 lg:block lg:group-hover:bg-slate-800/50 lg:group-hover:shadow-[inset_0_1px_0_0_rgba(148,163,184,0.1)] lg:group-hover:drop-shadow-lg"></div>
+                <header class="z-10 mb-2 mt-1 text-xs font-semibold uppercase tracking-wide text-slate-500 sm:col-span-2">2003 — 2004</header>
+                <div class="z-10 sm:col-span-6">
+                  <h3 class="font-medium leading-snug text-slate-200">
+                    <span>Senior QA Engineer · Thomson Micromedex</span>
+                  </h3>
+                  <p class="mt-2 text-sm leading-normal">
+                    Built load-test scenarios and led QA for clinical decision-support software.
+                  </p>
+                </div>
+              </div>
+            </li>
+
+            <li class="mb-12">
+              <div class="group relative grid pb-1 transition-all sm:grid-cols-8 sm:gap-8 md:gap-4 lg:hover:!opacity-100 lg:group-hover/list:opacity-50">
+                <div class="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-md transition lg:-inset-x-6 lg:block lg:group-hover:bg-slate-800/50 lg:group-hover:shadow-[inset_0_1px_0_0_rgba(148,163,184,0.1)] lg:group-hover:drop-shadow-lg"></div>
+                <header class="z-10 mb-2 mt-1 text-xs font-semibold uppercase tracking-wide text-slate-500 sm:col-span-2">1999 — 2000</header>
+                <div class="z-10 sm:col-span-6">
+                  <h3 class="font-medium leading-snug text-slate-200">
+                    <span>Web Developer, QA Engineer · Achieve Communications</span>
+                  </h3>
+                  <p class="mt-2 text-sm leading-normal">
+                    Started my career writing code for an e-learning application — and found I had
+                    a talent for breaking it.
+                  </p>
+                </div>
+              </div>
+            </li>
+
+            <li class="mb-12">
+              <div class="group relative grid pb-1 transition-all sm:grid-cols-8 sm:gap-8 md:gap-4 lg:hover:!opacity-100 lg:group-hover/list:opacity-50">
+                <div class="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-md transition lg:-inset-x-6 lg:block lg:group-hover:bg-slate-800/50 lg:group-hover:shadow-[inset_0_1px_0_0_rgba(148,163,184,0.1)] lg:group-hover:drop-shadow-lg"></div>
+                <header class="z-10 mb-2 mt-1 text-xs font-semibold uppercase tracking-wide text-slate-500 sm:col-span-2">Education</header>
+                <div class="z-10 sm:col-span-6">
+                  <h3 class="font-medium leading-snug text-slate-200">
+                    <span>Masters, Computer IT</span>
+                  </h3>
+                  <p class="mt-2 text-sm leading-normal">
+                    Regis University, Colorado.
+                  </p>
+                  <h3 class="font-medium leading-snug text-slate-200 mt-4">
+                    <span>Bachelors of Arts, Kinesiology</span>
+                  </h3>
+                  <p class="mt-2 text-sm leading-normal">
+                    University of Colorado, Boulder.
+                  </p>
+                </div>
+              </div>
+            </li>
+
+          </ol>
+        </div>
+      </section>
+
+      <section id="projects" class="mb-16 scroll-mt-16 md:mb-24 lg:mb-36" aria-label="Selected projects">
+        <div>
+          <ul class="group/list">
+
+            <li class="mb-12">
+              <div class="group relative grid gap-4 pb-1 transition-all sm:grid-cols-8 sm:gap-8 md:gap-4 lg:hover:!opacity-100 lg:group-hover/list:opacity-50">
+                <div class="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-md transition lg:-inset-x-6 lg:block lg:group-hover:bg-slate-800/50 lg:group-hover:shadow-[inset_0_1px_0_0_rgba(148,163,184,0.1)] lg:group-hover:drop-shadow-lg"></div>
+                <div class="z-10 sm:order-2 sm:col-span-6">
+                  <h3>
+                    <a class="inline-flex items-baseline font-medium leading-tight text-slate-200 group/link text-base" href="https://www.onpathtesting.com" target="_blank" rel="noreferrer">
+                      <span>OnPath
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="inline-block h-4 w-4 shrink-0 transition-transform group-hover/link:-translate-y-1 group-hover/link:translate-x-1 ml-1 translate-y-px"><path fill-rule="evenodd" d="M5.22 14.78a.75.75 0 001.06 0l7.22-7.22v5.69a.75.75 0 001.5 0v-7.5a.75.75 0 00-.75-.75h-7.5a.75.75 0 000 1.5h5.69l-7.22 7.22a.75.75 0 000 1.06z" clip-rule="evenodd"></path></svg>
+                      </span>
+                    </a>
+                  </h3>
+                  <p class="mt-2 text-sm leading-normal">
+                    QA consulting practice founded in 2009 — manual, automated, performance,
+                    security, and accessibility testing for startups through established brands.
+                    20+ engineers, 100,000+ tests planned, 1M+ executed. Clutch "Top Software
+                    Testing Company" (2024).
+                  </p>
+                </div>
+                <a href="https://www.onpathtesting.com" target="_blank" rel="noreferrer" class="sm:order-1 sm:col-span-2 sm:translate-y-1">
+                  <img alt="OnPath" loading="lazy" width="200" height="48"
+                    class="aspect-video object-cover rounded border-2 border-slate-200/10 transition group-hover:border-slate-200/30"
+                    src="/projects/onpath.png" />
+                </a>
+              </div>
+            </li>
+
+            <li class="mb-12">
+              <div class="group relative grid gap-4 pb-1 transition-all sm:grid-cols-8 sm:gap-8 md:gap-4 lg:hover:!opacity-100 lg:group-hover/list:opacity-50">
+                <div class="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-md transition lg:-inset-x-6 lg:block lg:group-hover:bg-slate-800/50 lg:group-hover:shadow-[inset_0_1px_0_0_rgba(148,163,184,0.1)] lg:group-hover:drop-shadow-lg"></div>
+                <div class="z-10 sm:order-2 sm:col-span-6">
+                  <h3>
+                    <a class="inline-flex items-baseline font-medium leading-tight text-slate-200 group/link text-base" href="https://realbooks.online" target="_blank" rel="noreferrer">
+                      <span>RealBooks
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="inline-block h-4 w-4 shrink-0 transition-transform group-hover/link:-translate-y-1 group-hover/link:translate-x-1 ml-1 translate-y-px"><path fill-rule="evenodd" d="M5.22 14.78a.75.75 0 001.06 0l7.22-7.22v5.69a.75.75 0 001.5 0v-7.5a.75.75 0 00-.75-.75h-7.5a.75.75 0 000 1.5h5.69l-7.22 7.22a.75.75 0 000 1.06z" clip-rule="evenodd"></path></svg>
+                      </span>
+                    </a>
+                  </h3>
+                  <p class="mt-2 text-sm leading-normal">
+                    Client engagement — development and QA support. RealBooks is multi-business +
+                    personal accounting software (an alternative to QuickBooks/FreshBooks/Xero)
+                    that unifies every business you own and your personal finances into one
+                    connected picture.
+                  </p>
+                </div>
+                <a href="https://realbooks.online" target="_blank" rel="noreferrer" class="sm:order-1 sm:col-span-2 sm:translate-y-1">
+                  <img alt="RealBooks" loading="lazy" width="200" height="48"
+                    class="aspect-video object-cover rounded border-2 border-slate-200/10 transition group-hover:border-slate-200/30"
+                    src="/projects/realbooks.png" />
+                </a>
+              </div>
+            </li>
+
+            <li class="mb-12">
+              <div class="group relative grid gap-4 pb-1 transition-all sm:grid-cols-8 sm:gap-8 md:gap-4 lg:hover:!opacity-100 lg:group-hover/list:opacity-50">
+                <div class="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-md transition lg:-inset-x-6 lg:block lg:group-hover:bg-slate-800/50 lg:group-hover:shadow-[inset_0_1px_0_0_rgba(148,163,184,0.1)] lg:group-hover:drop-shadow-lg"></div>
+                <div class="z-10 sm:order-2 sm:col-span-6">
+                  <h3>
+                    <a class="inline-flex items-baseline font-medium leading-tight text-slate-200 group/link text-base" href="https://oncatch.app" target="_blank" rel="noreferrer">
+                      <span>OnCatch
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="inline-block h-4 w-4 shrink-0 transition-transform group-hover/link:-translate-y-1 group-hover/link:translate-x-1 ml-1 translate-y-px"><path fill-rule="evenodd" d="M5.22 14.78a.75.75 0 001.06 0l7.22-7.22v5.69a.75.75 0 001.5 0v-7.5a.75.75 0 00-.75-.75h-7.5a.75.75 0 000 1.5h5.69l-7.22 7.22a.75.75 0 000 1.06z" clip-rule="evenodd"></path></svg>
+                      </span>
+                    </a>
+                  </h3>
+                  <p class="mt-2 text-sm leading-normal">
+                    An OnPath Testing product. Embeddable bug-capture widget with QA-in-the-loop
+                    triage — forensic evidence capture (screenshots, console + network logs,
+                    annotations), two-way sync to Jira/Linear/GitHub, and an MCP server so AI
+                    coding tools can read the bug queue directly.
+                  </p>
+                </div>
+                <a href="https://oncatch.app" target="_blank" rel="noreferrer" class="sm:order-1 sm:col-span-2 sm:translate-y-1">
+                  <img alt="OnCatch" loading="lazy" width="200" height="48"
+                    class="aspect-video object-cover rounded border-2 border-slate-200/10 transition group-hover:border-slate-200/30"
+                    src="/projects/oncatch.png" />
+                </a>
+              </div>
+            </li>
+
+            <li class="mb-12">
+              <div class="group relative grid gap-4 pb-1 transition-all sm:grid-cols-8 sm:gap-8 md:gap-4 lg:hover:!opacity-100 lg:group-hover/list:opacity-50">
+                <div class="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-md transition lg:-inset-x-6 lg:block lg:group-hover:bg-slate-800/50 lg:group-hover:shadow-[inset_0_1px_0_0_rgba(148,163,184,0.1)] lg:group-hover:drop-shadow-lg"></div>
+                <div class="z-10 sm:order-2 sm:col-span-6">
+                  <h3>
+                    <a class="inline-flex items-baseline font-medium leading-tight text-slate-200 group/link text-base" href="https://onpath.software" target="_blank" rel="noreferrer">
+                      <span>QA Platform
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="inline-block h-4 w-4 shrink-0 transition-transform group-hover/link:-translate-y-1 group-hover/link:translate-x-1 ml-1 translate-y-px"><path fill-rule="evenodd" d="M5.22 14.78a.75.75 0 001.06 0l7.22-7.22v5.69a.75.75 0 001.5 0v-7.5a.75.75 0 00-.75-.75h-7.5a.75.75 0 000 1.5h5.69l-7.22 7.22a.75.75 0 000 1.06z" clip-rule="evenodd"></path></svg>
+                      </span>
+                    </a>
+                  </h3>
+                  <p class="mt-2 text-sm leading-normal">
+                    OnPath's free code audit tool — scores a public GitHub repo across 5 quality
+                    dimensions (security, architecture, dependencies, process maturity,
+                    performance) in under a minute. First surface of a fuller QA platform in
+                    active development.
+                  </p>
+                </div>
+                <a href="https://onpath.software" target="_blank" rel="noreferrer" class="sm:order-1 sm:col-span-2 sm:translate-y-1">
+                  <img alt="QA Platform" loading="lazy" width="200" height="48"
+                    class="aspect-video object-cover rounded border-2 border-slate-200/10 transition group-hover:border-slate-200/30"
+                    src="/projects/qa-platform.png" />
+                </a>
+              </div>
+            </li>
+
+            <li class="mb-12">
+              <div class="group relative grid gap-4 pb-1 transition-all sm:grid-cols-8 sm:gap-8 md:gap-4 lg:hover:!opacity-100 lg:group-hover/list:opacity-50">
+                <div class="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-md transition lg:-inset-x-6 lg:block lg:group-hover:bg-slate-800/50 lg:group-hover:shadow-[inset_0_1px_0_0_rgba(148,163,184,0.1)] lg:group-hover:drop-shadow-lg"></div>
+                <div class="z-10 sm:order-2 sm:col-span-6">
+                  <h3>
+                    <span class="inline-flex items-baseline font-medium leading-tight text-slate-200 text-base">OnTime</span>
+                  </h3>
+                  <p class="mt-2 text-sm leading-normal">
+                    An OnPath Testing product, in development. Time-tracking app built to replace
+                    Tickspot — tracks hours against clients, projects, and tasks with budget alerts
+                    at 50/75/100% consumption. Built for OnPath's internal use, with potential to
+                    become a standalone SaaS product.
+                  </p>
+                </div>
+                <div class="sm:order-1 sm:col-span-2 sm:translate-y-1 flex aspect-video items-center justify-center rounded border-2 border-dashed border-slate-200/10 text-xs text-slate-500">
+                  Coming soon!
+                </div>
+              </div>
+            </li>
+
+          </ul>
+        </div>
+      </section>
+
+      <section id="recognition" class="mb-16 scroll-mt-16 md:mb-24 lg:mb-36" aria-label="Recognition">
+        <h2 class="mb-8 text-sm font-bold uppercase tracking-widest text-slate-200">Recognition</h2>
+        <ul class="space-y-4">
+          <li class="flex items-start gap-3 text-sm leading-normal">
+            <span class="mt-1.5 shrink-0 text-teal-400/70 text-[10px]">&#9670;</span>
+            <span>Mercury 100 — Fastest Growing Companies in Boulder Valley (2015, 2019, 2021-24)</span>
+          </li>
+          <li class="flex items-start gap-3 text-sm leading-normal">
+            <span class="mt-1.5 shrink-0 text-teal-400/70 text-[10px]">&#9670;</span>
+            <span>Clutch Top Software Testing Companies (2019, 2022)</span>
+          </li>
+          <li class="flex items-start gap-3 text-sm leading-normal">
+            <span class="mt-1.5 shrink-0 text-teal-400/70 text-[10px]">&#9670;</span>
+            <span>1% for the Planet member</span>
+          </li>
+          <li class="flex items-start gap-3 text-sm leading-normal">
+            <span class="mt-1.5 shrink-0 text-teal-400/70 text-[10px]">&#9670;</span>
+            <span>17 verified client reviews on <a class="font-medium text-slate-200 hover:text-teal-300" href="https://clutch.co/profile/onpath-testing" target="_blank" rel="noreferrer">Clutch.co</a>, average rating 4.7 / 5.0</span>
+          </li>
+        </ul>
+      </section>
+
+      <section id="testimonials" class="mb-16 scroll-mt-16 md:mb-24 lg:mb-36" aria-label="Testimonials">
+        <h2 class="mb-8 text-sm font-bold uppercase tracking-widest text-slate-200">Testimonials</h2>
+
+        <div id="testimonial-carousel" class="relative" role="region" aria-roledescription="carousel" aria-label="Client testimonials">
+          <blockquote class="border-l-2 border-teal-400/40 pl-6 min-h-[160px]">
+            <p id="testimonial-quote" class="testimonial-fade font-serif text-lg italic leading-relaxed text-slate-200 mb-4"></p>
+            <cite id="testimonial-cite" class="testimonial-fade not-italic text-xs uppercase tracking-wide text-slate-500"></cite>
+          </blockquote>
+
+          <div class="mt-6 flex items-center gap-4">
+            <button id="testimonial-prev" type="button" aria-label="Previous testimonial" class="flex h-8 w-8 items-center justify-center rounded-full border border-slate-600 text-slate-400 transition-colors hover:border-teal-300 hover:text-teal-300">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-4 w-4"><path fill-rule="evenodd" d="M12.79 5.23a.75.75 0 010 1.06L9.06 10l3.73 3.71a.75.75 0 11-1.06 1.06l-4.25-4.25a.75.75 0 010-1.06l4.25-4.25a.75.75 0 011.06 0z" clip-rule="evenodd"></path></svg>
+            </button>
+            <div id="testimonial-dots" class="flex items-center gap-2" role="tablist" aria-label="Choose testimonial"></div>
+            <button id="testimonial-next" type="button" aria-label="Next testimonial" class="flex h-8 w-8 items-center justify-center rounded-full border border-slate-600 text-slate-400 transition-colors hover:border-teal-300 hover:text-teal-300">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-4 w-4"><path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 010-1.06L10.94 10 7.21 6.29a.75.75 0 111.06-1.06l4.25 4.25a.75.75 0 010 1.06l-4.25 4.25a.75.75 0 01-1.06 0z" clip-rule="evenodd"></path></svg>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <footer class="max-w-md pb-16 text-sm text-slate-500 sm:pb-0">
+        <p>
+          Reach me at <a class="font-medium text-slate-200 hover:text-teal-300" href="mailto:me@brianborg.com">me@brianborg.com</a>.
+        </p>
+      </footer>
+
+    </main>
+  </div>
+</div>
+</div>
+
+<style>
+  .nav-indicator { transition: all .15s; }
+  .active .nav-indicator { width: 4rem; background-color: #e2e8f0; }
+  .active .nav-text { color: #e2e8f0; }
+  .testimonial-fade { transition: opacity .25s ease; }
+  .testimonial-fade.fade-out { opacity: 0; }
+</style>
+
+<script>
+  const spotlight = document.getElementById('spotlight');
+  document.addEventListener('mousemove', (e) => {
+    spotlight.style.background = `radial-gradient(600px circle at ${e.clientX}px ${e.clientY}px, rgba(29, 78, 216, 0.15), transparent 80%)`;
+  });
+</script>
+
+<script>
+  const testimonials = [
+    {
+      quote: "OnPath did more than just help test and validate. They designed and implemented test methodologies and pointed out opportunities we weren't aware of. They really created a well-rounded approach as a true partner instead of just a vendor.",
+      author: "Craig Roth",
+      role: "Product Manager, ClearCaptions",
+    },
+    {
+      quote: "Having OnPath as a partner gave me excellent flexibility to surge our testing resources when needed. If you need manual test support, OnPath is a great option to increase your capacity.",
+      author: "Tom Steiger",
+      role: "CTO, BioTRUST Nutrition",
+    },
+    {
+      quote: "OnPath provides a solution that is no more costly than working with an offshore body shop, but delivers much more. The resource they put in place was smart and wrote up good defects.",
+      author: "Douglas Knoll",
+      role: "President, CodeRinger",
+    },
+    {
+      quote: "We failed out of a lot of external vendors before working with OnPath. The model with a US person managing was able to bridge the common logistics problems of outsourcing QA. Brian is super responsive and easy to work with.",
+      author: "Allison Reder",
+      role: "COO, PAIRIN",
+    },
+    {
+      quote: "Brian and his team were readily available to our needs and exceeded expectations.",
+      author: "Robert Whent",
+      role: "Founder, WeCam Technologies",
+    },
+  ];
+
+  const quoteEl = document.getElementById('testimonial-quote');
+  const citeEl = document.getElementById('testimonial-cite');
+  const dotsEl = document.getElementById('testimonial-dots');
+  const prevBtn = document.getElementById('testimonial-prev');
+  const nextBtn = document.getElementById('testimonial-next');
+
+  let current = 0;
+  let autoplayTimer = null;
+
+  function renderDots() {
+    dotsEl.innerHTML = '';
+    testimonials.forEach((_, i) => {
+      const dot = document.createElement('button');
+      dot.type = 'button';
+      dot.setAttribute('role', 'tab');
+      dot.setAttribute('aria-label', `Go to testimonial ${i + 1}`);
+      dot.className = 'h-1.5 rounded-full transition-all ' + (i === current ? 'w-6 bg-teal-300' : 'w-1.5 bg-slate-600 hover:bg-slate-400');
+      dot.addEventListener('click', () => goTo(i));
+      dotsEl.appendChild(dot);
+    });
+  }
+
+  function renderSlide() {
+    const t = testimonials[current];
+    quoteEl.classList.add('fade-out');
+    citeEl.classList.add('fade-out');
+    setTimeout(() => {
+      quoteEl.textContent = `"${t.quote}"`;
+      citeEl.textContent = `— ${t.author}, ${t.role}`;
+      quoteEl.classList.remove('fade-out');
+      citeEl.classList.remove('fade-out');
+    }, 250);
+    renderDots();
+  }
+
+  function goTo(index) {
+    current = (index + testimonials.length) % testimonials.length;
+    renderSlide();
+    resetAutoplay();
+  }
+
+  function next() { goTo(current + 1); }
+  function prev() { goTo(current - 1); }
+
+  function resetAutoplay() {
+    if (autoplayTimer) clearInterval(autoplayTimer);
+    autoplayTimer = setInterval(next, 6000);
+  }
+
+  prevBtn.addEventListener('click', prev);
+  nextBtn.addEventListener('click', next);
+
+  const carousel = document.getElementById('testimonial-carousel');
+  carousel.addEventListener('mouseenter', () => { if (autoplayTimer) clearInterval(autoplayTimer); });
+  carousel.addEventListener('mouseleave', resetAutoplay);
+
+  quoteEl.textContent = `"${testimonials[0].quote}"`;
+  citeEl.textContent = `— ${testimonials[0].author}, ${testimonials[0].role}`;
+  renderDots();
+  resetAutoplay();
+</script>
 </Layout>
