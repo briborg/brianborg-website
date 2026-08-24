@@ -62,6 +62,13 @@ HARD RULES (a post that breaks any of these will be thrown out):
 - At most ONE post may be a short thread; if so, return its parts joined by the
   literal token "\\n---\\n" inside the "text" field and set "thread": true.
 
+VOICE (tov-social) — the examples below, if present, are real sentences Brian
+actually wrote (PII-scrubbed). Match their rhythm and directness directly;
+don't paraphrase them into a description of his tone. Complete sentences over
+clipped fragments, a little warmth is fine, still no corporate filler.
+
+{voice_examples}
+
 {corpus}
 
 Return ONLY a JSON array of {count} objects, each:
@@ -180,6 +187,7 @@ def main():
         count=args.count,
         limit=X_HARD_LIMIT,
         corpus=context.load_corpus(),
+        voice_examples=context.load_real_voice_examples(),
         current_date=now.strftime("%A, %B %d, %Y"),
         current_year=now.year,
     )

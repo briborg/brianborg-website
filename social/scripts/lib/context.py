@@ -45,6 +45,42 @@ def load_env(path: str | None = None) -> None:
     _load_one(path or DEFAULT_ENV_PATH)
 
 
+def load_real_voice_examples(n: int = 8) -> str:
+    """Real few-shot examples from Brian's actual writing (tov-social skill's
+    grounding method — see ~/.claude/skills/tov-social/SKILL.md).
+
+    Calls the sampler script that lives in onpath-org (where the corpus is,
+    private repo) by absolute path. Locally this is the sibling checkout at
+    ~/Projects/onpath-org; in CI, a workflow step does a sparse checkout of
+    onpath-org into ONPATH_ORG_PATH (only once the ONPATH_ORG_PAT secret is
+    set — see x-generate.yml). Returns "" and lets the caller fall back to
+    corpus/brian-voice.md's static examples if neither is available, so this
+    degrades quietly like the rest of this pipeline's optional secrets."""
+    root = os.environ.get("ONPATH_ORG_PATH", os.path.expanduser("~/Projects/onpath-org"))
+    sampler = os.path.join(root, "marketing", "lib", "onpath_clients", "voice_client.py")
+    if not os.path.exists(sampler):
+        return ""
+
+    import subprocess
+    try:
+        result = subprocess.run(
+            ["python3", sampler, "sample", "--n", str(n)],
+            capture_output=True, text=True, timeout=15, check=True,
+        )
+    except Exception:
+        return ""
+
+    examples = result.stdout.strip()
+    if not examples:
+        return ""
+
+    return (
+        "\n\n---\n\n## REAL VOICE EXAMPLES (Brian's actual writing, PII-scrubbed — "
+        "match this rhythm and directness; grounding material, not content to "
+        "quote verbatim)\n\n" + examples + "\n\n---\n\n"
+    )
+
+
 def load_corpus() -> str:
     """Concatenate every corpus/*.md, highest weight first. The voice doc
     (weight 3.0) is the backbone; themes (2.0) are source material."""
