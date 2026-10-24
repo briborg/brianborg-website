@@ -1,3 +1,4 @@
+import { validateLegalPage } from './music-legal-validation.mjs';
 import { readFileSync } from 'node:fs';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
@@ -5,10 +6,7 @@ const read = p => readFileSync(new URL('../public/music-transfer/' + p, import.m
 for (const path of ['index.html', 'privacy/index.html', 'terms/index.html']) {
   test(path + ' is accessible, linked, and excludes private audit material', () => {
     const html = read(path);
-    for (const fragment of ['<html lang="en">', 'name="viewport"', '<h1>', '/music-transfer/privacy/', '/music-transfer/terms/']) assert.ok(html.includes(fragment));
-    assert.doesNotMatch(html, /\b\d{5}(?:-\d{4})?\b|refresh_token|client_secret|DRAFT FOR REVIEW|quota-applicant/i);
-    assert.doesNotMatch(html, /<script|<iframe|<img[^>]+https:/i);
-    for (const h of html.matchAll(/<h2>([\s\S]*?)<\/h2>/g)) assert.ok(h[1].length < 150 && !h[1].includes('\n'), 'Heading must not contain body paragraphs');
+    validateLegalPage(html);
   });
 }
 test('privacy discloses Google, Codex, local storage and deletion obligations', () => {
@@ -20,4 +18,9 @@ test('terms identify private use and binding YouTube terms', () => {
   assert.ok(html.includes('Using the client means agreeing'));
   assert.ok(html.includes('www.youtube.com/t/terms'));
   assert.ok(html.includes('uncertain or unavailable') || html.includes('uncertain or unavailable'.replace('uncertain', 'Uncertain')));
+});
+
+test('validator rejects missing links, private data, scripts and paragraph headings', () => {
+  const html=read('privacy/index.html');
+  for (const bad of [html.replaceAll('/music-transfer/privacy/','/missing/'), html+'<p>refresh_token=synthetic</p>', html+'<script>unwanted()</script>', html+'<h2>Heading\nparagraph</h2>']) assert.throws(() => validateLegalPage(bad));
 });
