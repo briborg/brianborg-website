@@ -1,0 +1,22 @@
+name: Music legal pages
+on:
+  pull_request:
+    paths: ['public/music-transfer/**', 'scripts/*music-legal*.mjs', '.github/workflows/music-legal.yml']
+  push:
+    branches: [main]
+    paths: ['public/music-transfer/**', 'scripts/*music-legal*.mjs', '.github/workflows/music-legal.yml']
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      # HTML content is checked explicitly; the threshold applies only to the executable validator, not HTML.
+      - run: node --experimental-test-coverage --test-coverage-lines=80 --test-coverage-include=**/music-legal-validation.mjs --test scripts/test-music-legal.mjs
+      - run: npm run build
